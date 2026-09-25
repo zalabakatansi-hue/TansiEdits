@@ -1,245 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin — Tansi Cyril</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login</title>
 
   <style>
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
+      margin: 0;
       min-height: 100vh;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(120, 80, 255, 0.16), transparent 35%),
-        radial-gradient(circle at 80% 80%, rgba(0, 200, 255, 0.10), transparent 35%),
-        #07070a;
-      color: #fff;
-      font-family: Inter, Arial, sans-serif;
+      background: #070707;
+      color: white;
+      font-family: Arial, sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px;
+      padding: 20px;
     }
 
-    .login-card {
+    .box {
       width: 100%;
-      max-width: 430px;
-      padding: 38px 30px;
-      border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 24px;
-      background: rgba(255,255,255,0.045);
-      backdrop-filter: blur(25px);
-      box-shadow: 0 30px 100px rgba(0,0,0,0.45);
-    }
-
-    .eyebrow {
-      color: #999;
-      font-size: 12px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
+      max-width: 420px;
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 18px;
+      padding: 30px;
     }
 
     h1 {
-      font-size: clamp(34px, 9vw, 48px);
-      line-height: 1;
-      letter-spacing: -0.04em;
-      margin-bottom: 12px;
-    }
-
-    .subtitle {
-      color: #999;
-      line-height: 1.6;
-      margin-bottom: 30px;
-    }
-
-    label {
-      display: block;
-      font-size: 13px;
-      color: #aaa;
-      margin-bottom: 8px;
+      margin-top: 0;
     }
 
     input {
       width: 100%;
-      padding: 15px 16px;
-      margin-bottom: 18px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.06);
+      padding: 15px;
+      margin-top: 10px;
+      margin-bottom: 15px;
+      background: #080808;
       color: white;
-      outline: none;
-      font-size: 15px;
-    }
-
-    input:focus {
-      border-color: rgba(255,255,255,0.4);
+      border: 1px solid #333;
+      border-radius: 10px;
+      font-size: 16px;
     }
 
     button {
       width: 100%;
-      padding: 16px;
+      padding: 15px;
       border: 0;
-      border-radius: 12px;
+      border-radius: 10px;
       background: white;
       color: black;
-      font-weight: 700;
-      font-size: 15px;
-      cursor: pointer;
-      transition: transform .2s ease, opacity .2s ease;
+      font-size: 16px;
+      font-weight: bold;
     }
 
-    button:active {
-      transform: scale(.98);
-    }
-
-    button:disabled {
-      opacity: .55;
-      cursor: not-allowed;
-    }
-
-    #message {
-      margin-top: 18px;
-      text-align: center;
-      font-size: 14px;
-      line-height: 1.5;
+    #status {
+      margin-top: 20px;
       color: #aaa;
-    }
-
-    .brand {
-      margin-top: 28px;
-      text-align: center;
-      color: #555;
-      font-size: 12px;
+      line-height: 1.5;
+      word-break: break-word;
     }
   </style>
 </head>
 
 <body>
 
-  <main class="login-card">
+<div class="box">
+  <h1>Admin Login</h1>
 
-    <div class="eyebrow">Tansi Cyril · Admin</div>
+  <input
+    id="email"
+    type="email"
+    placeholder="Email"
+  >
 
-    <h1>Welcome back.</h1>
+  <input
+    id="password"
+    type="password"
+    placeholder="Password"
+  >
 
-    <p class="subtitle">
-      Sign in to manage your portfolio, projects, testimonials and website content.
-    </p>
+  <button onclick="login()">
+    Login
+  </button>
 
-    <form id="loginForm">
+  <div id="status">
+    Ready.
+  </div>
+</div>
 
-      <label for="email">Email</label>
-      <input
-        id="email"
-        type="email"
-        placeholder="Your admin email"
-        autocomplete="email"
-        required
-      />
+<script type="module">
 
-      <label for="password">Password</label>
-      <input
-        id="password"
-        type="password"
-        placeholder="Your password"
-        autocomplete="current-password"
-        required
-      />
+import { createClient } from
+"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
-      <button id="loginButton" type="submit">
-        Sign in
-      </button>
+const SUPABASE_URL = "https://jogogwzfspqtryadusuj.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_gNyURgRCjKgTrrbawUZNkQ_B7vVB-IU";
 
-    </form>
+const supabase = createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);
 
-    <div id="message"></div>
+window.login = async function () {
 
-    <div class="brand">
-      Growth through better editing.
-    </div>
+  const status = document.getElementById("status");
 
-  </main>
+  status.textContent = "Connecting to Supabase...";
 
-  <script type="module">
+  try {
 
-    import { createClient } from
-      "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+    const email =
+      document.getElementById("email").value.trim();
 
-    const SUPABASE_URL = "https://jogogwzfspqtryadusuj.supabase.coL";
-    const SUPABASE_ANON_KEY = "sb_publishable_gNyURgRCjKgTrrbawUZNkQ_B7vVB-IU";
+    const password =
+      document.getElementById("password").value;
 
-    const supabase = createClient(
-      SUPABASE_URL,
-      SUPABASE_ANON_KEY
-    );
+    if (!email || !password) {
+      status.textContent = "Enter your email and password.";
+      return;
+    }
 
-    const form = document.getElementById("loginForm");
-    const button = document.getElementById("loginButton");
-    const message = document.getElementById("message");
+    status.textContent = "Signing in...";
 
-    form.addEventListener("submit", async (event) => {
+    const { data, error } =
+      await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
 
-      event.preventDefault();
+    if (error) {
+      status.textContent =
+        "LOGIN ERROR: " + error.message;
+      return;
+    }
 
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
+    if (!data.session) {
+      status.textContent =
+        "Login succeeded, but no session was created.";
+      return;
+    }
 
-      button.disabled = true;
-      button.textContent = "Signing in...";
-      message.textContent = "";
+    status.textContent =
+      "Login successful. Checking admin access...";
 
-      try {
+    const { data: isAdmin, error: adminError } =
+      await supabase.rpc("is_admin");
 
-        const { data, error } =
-          await supabase.auth.signInWithPassword({
-            email,
-            password
-          });
+    if (adminError) {
+      status.textContent =
+        "ADMIN RPC ERROR: " + adminError.message;
+      return;
+    }
 
-        if (error) {
-          throw error;
-        }
+    if (!isAdmin) {
+      status.textContent =
+        "AUTHENTICATED, BUT NOT ADMIN. Your user ID is: "
+        + data.user.id;
+      return;
+    }
 
-        const { data: isAdmin, error: adminError } =
-          await supabase.rpc("is_admin");
+    status.textContent =
+      "Admin verified. Opening dashboard...";
 
-        if (adminError) {
-          throw adminError;
-        }
+    window.location.href =
+      "/admin/dashboard.html";
 
-        if (!isAdmin) {
+  } catch (err) {
 
-          await supabase.auth.signOut();
+    status.textContent =
+      "JAVASCRIPT ERROR: " + err.message;
 
-          throw new Error(
-            "This account is not authorized as an administrator."
-          );
-        }
+    console.error(err);
+  }
 
-        message.textContent = "Login successful. Opening dashboard...";
+};
 
-        window.location.href = "/admin/dashboard.html";
-
-      } catch (error) {
-
-        console.error(error);
-
-        message.textContent =
-          error.message || "Something went wrong.";
-
-        button.disabled = false;
-        button.textContent = "Sign in";
-      }
-
-    });
-
-  </script>
+</script>
 
 </body>
 </html>
