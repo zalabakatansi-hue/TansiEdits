@@ -291,7 +291,7 @@
       margin-top: 10px;
     }
 
-    /* PROJECT LIST */
+    /* PROJECT / TESTIMONIAL LIST */
 
     .project-row {
       display: flex;
@@ -593,7 +593,6 @@
 
   <main class="main">
 
-
     <!-- OVERVIEW -->
 
     <section class="page active" id="overview">
@@ -633,6 +632,7 @@
           </div>
         </div>
 
+
         <div class="stat">
           <div class="stat-label">
             Published
@@ -643,6 +643,7 @@
           </div>
         </div>
 
+
         <div class="stat">
           <div class="stat-label">
             Testimonials
@@ -652,6 +653,7 @@
             —
           </div>
         </div>
+
 
         <div class="stat">
           <div class="stat-label">
@@ -685,6 +687,7 @@
 
         </div>
 
+
         <div class="form-actions">
 
           <button
@@ -693,6 +696,7 @@
           >
             + New project
           </button>
+
 
           <button
             class="btn btn-secondary"
@@ -709,7 +713,7 @@
 
 
     <!-- PROJECTS -->
-    
+
     <section class="page" id="projects">
 
       <div class="topbar">
@@ -723,6 +727,7 @@
             Projects.
           </h1>
         </div>
+
 
         <button
           class="btn btn-primary"
@@ -760,6 +765,7 @@
             Testimonials.
           </h1>
         </div>
+
 
         <button
           class="btn btn-primary"
@@ -823,101 +829,141 @@
           <div class="form-grid">
 
             <div class="field full">
-              <label>Hero title</label>
+
+              <label>
+                Hero title
+              </label>
 
               <input
                 id="heroTitle"
                 placeholder="Cut. Shape. Impact."
               >
+
             </div>
 
 
             <div class="field full">
-              <label>Hero description</label>
+
+              <label>
+                Hero description
+              </label>
 
               <textarea
                 id="heroDescription"
                 placeholder="Your short introduction..."
               ></textarea>
+
             </div>
 
 
             <div class="field full">
-              <label>About title</label>
+
+              <label>
+                About title
+              </label>
 
               <input
                 id="aboutTitle"
                 placeholder="Good editing isn't just cutting."
               >
+
             </div>
 
 
             <div class="field full">
-              <label>About text</label>
+
+              <label>
+                About text
+              </label>
 
               <textarea
                 id="aboutText"
               ></textarea>
+
             </div>
 
 
             <div class="field">
-              <label>Contact email</label>
+
+              <label>
+                Contact email
+              </label>
 
               <input
                 id="contactEmail"
                 type="email"
               >
+
             </div>
 
 
             <div class="field">
-              <label>WhatsApp number</label>
+
+              <label>
+                WhatsApp number
+              </label>
 
               <input
                 id="whatsappNumber"
                 placeholder="234XXXXXXXXXX"
               >
+
             </div>
 
 
             <div class="field">
-              <label>Instagram</label>
+
+              <label>
+                Instagram
+              </label>
 
               <input
                 id="instagramUrl"
                 placeholder="https://instagram.com/..."
               >
+
             </div>
 
 
             <div class="field">
-              <label>X / Twitter</label>
+
+              <label>
+                X / Twitter
+              </label>
 
               <input
                 id="twitterUrl"
                 placeholder="https://x.com/..."
               >
+
             </div>
 
 
             <div class="field">
-              <label>LinkedIn</label>
+
+              <label>
+                LinkedIn
+              </label>
 
               <input
                 id="linkedinUrl"
                 placeholder="https://linkedin.com/in/..."
               >
+
             </div>
 
 
             <div class="field">
-              <label>YouTube</label>
+
+              <label>
+                YouTube
+              </label>
 
               <input
                 id="youtubeUrl"
                 placeholder="https://youtube.com/..."
               >
+
             </div>
 
           </div>
@@ -952,6 +998,7 @@
       <div class="modal-header">
 
         <div>
+
           <div class="eyebrow">
             Portfolio
           </div>
@@ -959,7 +1006,9 @@
           <div class="panel-title">
             Project
           </div>
+
         </div>
+
 
         <button
           class="close"
@@ -978,13 +1027,18 @@
           id="projectId"
         >
 
+
         <div class="field">
-          <label>Title</label>
+
+          <label>
+            Title
+          </label>
 
           <input
             id="projectTitle"
             required
           >
+
         </div>
 
 
@@ -992,17 +1046,39 @@
 
           <div class="field">
 
-            <label>Category</label>
+            <label>
+              Category
+            </label>
 
             <select id="projectCategory">
 
-              <option>Podcast → Shorts</option>
-              <option>Short Form</option>
-              <option>Social Content</option>
-              <option>Long Form</option>
-              <option>Motion Design</option>
-              <option>Commercial</option>
-              <option>Other</option>
+              <option>
+                Podcast → Shorts
+              </option>
+
+              <option>
+                Short Form
+              </option>
+
+              <option>
+                Social Content
+              </option>
+
+              <option>
+                Long Form
+              </option>
+
+              <option>
+                Motion Design
+              </option>
+
+              <option>
+                Commercial
+              </option>
+
+              <option>
+                Other
+              </option>
 
             </select>
 
@@ -1011,7 +1087,9 @@
 
           <div class="field">
 
-            <label>Client</label>
+            <label>
+              Client
+            </label>
 
             <input id="projectClient">
 
@@ -1022,7 +1100,9 @@
 
         <div class="field">
 
-          <label>Description</label>
+          <label>
+            Description
+          </label>
 
           <textarea
             id="projectDescription"
@@ -1033,81 +1113,91 @@
 
         <div class="field">
 
-  <label>Upload Video</label>
+          <label>
+            Upload Video
+          </label>
 
-  <input
-    id="projectVideoFile"
-    type="file"
-    accept="video/*"
-  >
+          <input
+            id="projectVideoFile"
+            type="file"
+            accept="video/*"
+          >
 
-  <small
-    style="
-      display:block;
-      color:#777;
-      font-size:10px;
-      margin-top:7px;
-    "
-  >
-    Upload your project video from your phone.
-  </small>
+          <small
+            style="
+              display:block;
+              color:#777;
+              font-size:10px;
+              margin-top:7px;
+            "
+          >
+            Upload your project video from your phone.
+          </small>
 
-</div>
-
-
-<div class="field">
-
-  <label>Upload Thumbnail</label>
-
-  <input
-    id="projectThumbnailFile"
-    type="file"
-    accept="image/*"
-  >
-
-  <small
-    style="
-      display:block;
-      color:#777;
-      font-size:10px;
-      margin-top:7px;
-    "
-  >
-    JPG, PNG or WebP recommended.
-  </small>
-
-</div>
+        </div>
 
 
-<div class="field">
+        <div class="field">
 
-  <label>Video URL — optional</label>
+          <label>
+            Upload Thumbnail
+          </label>
 
-  <input
-    id="projectVideo"
-    placeholder="YouTube / Vimeo / hosted video URL"
-  >
+          <input
+            id="projectThumbnailFile"
+            type="file"
+            accept="image/*"
+          >
 
-</div>
+          <small
+            style="
+              display:block;
+              color:#777;
+              font-size:10px;
+              margin-top:7px;
+            "
+          >
+            JPG, PNG or WebP recommended.
+          </small>
+
+        </div>
 
 
-<div class="field">
+        <div class="field">
 
-  <label>Thumbnail URL — optional</label>
+          <label>
+            Video URL — optional
+          </label>
 
-  <input
-    id="projectThumbnail"
-    placeholder="Image URL"
-  >
+          <input
+            id="projectVideo"
+            placeholder="YouTube / Vimeo / hosted video URL"
+          >
 
-</div>
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Thumbnail URL — optional
+          </label>
+
+          <input
+            id="projectThumbnail"
+            placeholder="Image URL"
+          >
+
+        </div>
 
 
         <div class="form-grid">
 
           <div class="field">
 
-            <label>Year</label>
+            <label>
+              Year
+            </label>
 
             <input
               id="projectYear"
@@ -1120,7 +1210,9 @@
 
           <div class="field">
 
-            <label>Display order</label>
+            <label>
+              Display order
+            </label>
 
             <input
               id="projectOrder"
@@ -1170,6 +1262,7 @@
             Save project
           </button>
 
+
           <button
             type="button"
             class="btn btn-secondary"
@@ -1189,431 +1282,33 @@
 
   <!-- TESTIMONIAL MODAL -->
 
-<div class="modal" id="testimonialModal">
+  <div class="modal" id="testimonialModal">
 
-  <div class="modal-content">
+    <div class="modal-content">
 
-    <div class="modal-header">
+      <div class="modal-header">
 
-      <div>
-        <div class="eyebrow">
-          Social proof
-        </div>
+        <div>
 
-        <div class="panel-title">
-          Client testimonial
-        </div>
-      </div>
+          <div class="eyebrow">
+            Social proof
+          </div>
 
-      <button
-        class="close"
-        data-close="testimonialModal"
-      >
-        ×
-      </button>
-
-    </div>
-
-
-    <form id="testimonialForm">
-
-      <input
-        type="hidden"
-        id="testimonialId"
-      >
-
-
-      <div class="form-grid">
-
-        <div class="field">
-
-          <label>Client name</label>
-
-          <input
-            id="clientName"
-            required
-          >
+          <div class="panel-title">
+            Client testimonial
+          </div>
 
         </div>
 
-
-        <div class="field">
-
-          <label>Company</label>
-
-          <input
-            id="clientCompany"
-          >
-
-        </div>
-
-      </div>
-
-
-      <div class="form-grid">
-
-        <div class="field">
-
-          <label>Date</label>
-
-          <input
-            id="testimonialDate"
-            type="date"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Display order</label>
-
-          <input
-            id="testimonialOrder"
-            type="number"
-            value="0"
-          >
-
-        </div>
-
-      </div>
-
-
-      <div class="field">
-
-        <label>Client photo</label>
-
-        <input
-          id="clientPhotoFile"
-          type="file"
-          accept="image/*"
-        >
-
-        <small
-          style="
-            display:block;
-            color:#777;
-            font-size:10px;
-            margin-top:7px;
-          "
-        >
-          Upload a profile photo from your phone.
-        </small>
-
-      </div>
-
-
-      <div class="field">
-
-        <label>Client photo URL — optional</label>
-
-        <input
-          id="clientPhoto"
-          placeholder="Existing image URL"
-        >
-
-      </div>
-
-
-      <div class="field">
-
-        <label>Conversation screenshot</label>
-
-        <input
-          id="testimonialScreenshotFile"
-          type="file"
-          accept="image/*"
-        >
-
-        <small
-          style="
-            display:block;
-            color:#777;
-            font-size:10px;
-            margin-top:7px;
-          "
-        >
-          Upload a screenshot of the client's message praising your work.
-        </small>
-
-      </div>
-
-
-      <div class="field">
-
-        <label>Conversation screenshot URL — optional</label>
-
-        <input
-          id="testimonialScreenshot"
-          placeholder="Existing screenshot URL"
-        >
-
-      </div>
-
-
-      <div class="field">
-
-        <label>Quote / context</label>
-
-        <textarea
-          id="testimonialQuote"
-          placeholder="Optional text version of the client's feedback."
-        ></textarea>
-
-      </div>
-
-
-      <div class="field">
-
-        <label>Published</label>
-
-        <select id="testimonialPublished">
-
-          <option value="false">
-            Draft
-          </option>
-
-          <option value="true">
-            Published
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="form-actions">
 
         <button
-          type="submit"
-          class="btn btn-primary"
-        >
-          Save testimonial
-        </button>
-
-        <button
-          type="button"
-          class="btn btn-secondary"
+          class="close"
           data-close="testimonialModal"
         >
-          Cancel
+          ×
         </button>
 
       </div>
-
-    </form>
-
-  </div>
-
-</div>
-
-
-<div id="toast"></div>
-
-  <form id="testimonialForm">
-
-      <input
-        type="hidden"
-        id="testimonialId"
-      >
-
-
-      <!-- CLIENT INFO -->
-
-      <div class="form-grid">
-
-        <div class="field">
-
-          <label>Client name</label>
-
-          <input
-            id="clientName"
-            required
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Company</label>
-
-          <input
-            id="clientCompany"
-          >
-
-        </div>
-
-      </div>
-
-
-      <div class="form-grid">
-
-        <div class="field">
-
-          <label>Date</label>
-
-          <input
-            id="testimonialDate"
-            type="date"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Display order</label>
-
-          <input
-            id="testimonialOrder"
-            type="number"
-            value="0"
-          >
-
-        </div>
-
-      </div>
-
-
-      <!-- CLIENT PHOTO -->
-
-      <div class="field">
-
-        <label>Client photo</label>
-
-        <input
-          id="clientPhotoFile"
-          type="file"
-          accept="image/*"
-        >
-
-        <small
-          style="
-            display:block;
-            color:#777;
-            font-size:10px;
-            margin-top:7px;
-          "
-        >
-          Upload a profile photo from your phone.
-        </small>
-
-      </div>
-
-
-      <div class="field">
-
-        <label>Client photo URL — optional</label>
-
-        <input
-          id="clientPhoto"
-          placeholder="Existing image URL"
-        >
-
-      </div>
-
-
-      <!-- CONVERSATION SCREENSHOT -->
-
-      <div class="field">
-
-        <label>Conversation screenshot</label>
-
-        <input
-          id="testimonialScreenshotFile"
-          type="file"
-          accept="image/*"
-        >
-
-        <small
-          style="
-            display:block;
-            color:#777;
-            font-size:10px;
-            margin-top:7px;
-          "
-        >
-          Upload a screenshot of the client's message praising your work.
-        </small>
-
-      </div>
-
-
-      <div class="field">
-
-        <label>Conversation screenshot URL — optional</label>
-
-        <input
-          id="testimonialScreenshot"
-          placeholder="Existing screenshot URL"
-        >
-
-      </div>
-
-
-      <!-- QUOTE -->
-
-      <div class="field">
-
-        <label>Quote / context</label>
-
-        <textarea
-          id="testimonialQuote"
-          placeholder="Optional text version of the client's feedback."
-        ></textarea>
-
-      </div>
-
-
-      <!-- PUBLISH -->
-
-      <div class="field">
-
-        <label>Published</label>
-
-        <select id="testimonialPublished">
-
-          <option value="false">
-            Draft
-          </option>
-
-          <option value="true">
-            Published
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="form-actions">
-
-        <button
-          type="submit"
-          class="btn btn-primary"
-        >
-          Save testimonial
-        </button>
-
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-close="testimonialModal"
-        >
-          Cancel
-        </button>
-
-      </div>
-
-    </form>
-
-  </div>
-
-</div>
-
-
-<div id="toast"></div>
 
 
       <form id="testimonialForm">
@@ -1628,7 +1323,9 @@
 
           <div class="field">
 
-            <label>Client name</label>
+            <label>
+              Client name
+            </label>
 
             <input
               id="clientName"
@@ -1640,32 +1337,15 @@
 
           <div class="field">
 
-            <label>Company</label>
+            <label>
+              Company
+            </label>
 
-            <input id="clientCompany">
+            <input
+              id="clientCompany"
+            >
 
           </div>
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Testimonial</label>
-
-          <textarea
-            id="testimonialQuote"
-            required
-          ></textarea>
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Client photo URL</label>
-
-          <input id="clientPhoto">
 
         </div>
 
@@ -1674,7 +1354,23 @@
 
           <div class="field">
 
-            <label>Display order</label>
+            <label>
+              Date
+            </label>
+
+            <input
+              id="testimonialDate"
+              type="date"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              Display order
+            </label>
 
             <input
               id="testimonialOrder"
@@ -1684,24 +1380,120 @@
 
           </div>
 
+        </div>
 
-          <div class="field">
 
-            <label>Published</label>
+        <div class="field">
 
-            <select id="testimonialPublished">
+          <label>
+            Client photo
+          </label>
 
-              <option value="false">
-                Draft
-              </option>
+          <input
+            id="clientPhotoFile"
+            type="file"
+            accept="image/*"
+          >
 
-              <option value="true">
-                Published
-              </option>
+          <small
+            style="
+              display:block;
+              color:#777;
+              font-size:10px;
+              margin-top:7px;
+            "
+          >
+            Upload a profile photo from your phone.
+          </small>
 
-            </select>
+        </div>
 
-          </div>
+
+        <div class="field">
+
+          <label>
+            Client photo URL — optional
+          </label>
+
+          <input
+            id="clientPhoto"
+            placeholder="Existing image URL"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Conversation screenshot
+          </label>
+
+          <input
+            id="testimonialScreenshotFile"
+            type="file"
+            accept="image/*"
+          >
+
+          <small
+            style="
+              display:block;
+              color:#777;
+              font-size:10px;
+              margin-top:7px;
+            "
+          >
+            Upload a screenshot of the client's message praising your work.
+          </small>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Conversation screenshot URL — optional
+          </label>
+
+          <input
+            id="testimonialScreenshot"
+            placeholder="Existing screenshot URL"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Quote / context
+          </label>
+
+          <textarea
+            id="testimonialQuote"
+            placeholder="Optional text version of the client's feedback."
+          ></textarea>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Published
+          </label>
+
+          <select id="testimonialPublished">
+
+            <option value="false">
+              Draft
+            </option>
+
+            <option value="true">
+              Published
+            </option>
+
+          </select>
 
         </div>
 
@@ -1714,6 +1506,7 @@
           >
             Save testimonial
           </button>
+
 
           <button
             type="button"
@@ -1732,8 +1525,12 @@
   </div>
 
 
+  <!-- SINGLE TOAST -->
+
   <div id="toast"></div>
 
+
+  <!-- JAVASCRIPT -->
 
   <script type="module">
 
@@ -1743,6 +1540,7 @@
 
     const SUPABASE_URL =
       "https://jogogwzfspqtryadusuj.supabase.co";
+
 
     const SUPABASE_ANON_KEY =
       "sb_publishable_gNyURgRCjKgTrrbawUZNkQ_B7vVB-IU";
@@ -1775,68 +1573,78 @@
       }
 
 
-      const { data: isAdmin, error } =
-        await supabase.rpc("is_admin");
+      const {
+        data: isAdmin,
+        error
+      } = await supabase.rpc("is_admin");
 
 
       if (error) {
 
-  document.body.innerHTML = `
-    <div style="
-      min-height:100vh;
-      background:#070707;
-      color:white;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:25px;
-      font-family:Arial,sans-serif;
-    ">
-      <div style="max-width:500px">
-        <h1 style="margin-bottom:15px">
-          Admin check failed
-        </h1>
+        document.body.innerHTML = `
+          <div style="
+            min-height:100vh;
+            background:#070707;
+            color:white;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:25px;
+            font-family:Arial,sans-serif;
+          ">
+            <div style="max-width:500px">
 
-        <p style="color:#999;line-height:1.6">
-          ${error.message}
-        </p>
-      </div>
-    </div>
-  `;
+              <h1 style="margin-bottom:15px">
+                Admin check failed
+              </h1>
 
-  return false;
-}
+              <p style="color:#999;line-height:1.6">
+                ${escapeHtml(error.message)}
+              </p>
 
-if (!isAdmin) {
+            </div>
+          </div>
+        `;
 
-  await supabase.auth.signOut();
+        return false;
 
-  document.body.innerHTML = `
-    <div style="
-      min-height:100vh;
-      background:#070707;
-      color:white;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:25px;
-      font-family:Arial,sans-serif;
-    ">
-      <div style="max-width:500px">
-        <h1 style="margin-bottom:15px">
-          Not authorized
-        </h1>
+      }
 
-        <p style="color:#999;line-height:1.6">
-          Your Supabase account is authenticated,
-          but it is not registered as a portfolio administrator.
-        </p>
-      </div>
-    </div>
-  `;
 
-  return false;
-}
+      if (!isAdmin) {
+
+        await supabase.auth.signOut();
+
+        document.body.innerHTML = `
+          <div style="
+            min-height:100vh;
+            background:#070707;
+            color:white;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:25px;
+            font-family:Arial,sans-serif;
+          ">
+            <div style="max-width:500px">
+
+              <h1 style="margin-bottom:15px">
+                Not authorized
+              </h1>
+
+              <p style="color:#999;line-height:1.6">
+                Your Supabase account is authenticated,
+                but it is not registered as a portfolio administrator.
+              </p>
+
+            </div>
+          </div>
+        `;
+
+        return false;
+
+      }
+
 
       return true;
 
@@ -1852,15 +1660,20 @@ if (!isAdmin) {
       document
         .querySelectorAll(".page")
         .forEach(page => {
+
           page.classList.remove("active");
+
         });
 
 
       const page =
         document.getElementById(pageName);
 
+
       if (page) {
+
         page.classList.add("active");
+
       }
 
 
@@ -1882,15 +1695,23 @@ if (!isAdmin) {
 
 
       if (pageName === "projects") {
+
         loadProjects();
+
       }
+
 
       if (pageName === "testimonials") {
+
         loadTestimonials();
+
       }
 
+
       if (pageName === "content") {
+
         loadSiteContent();
+
       }
 
     }
@@ -1900,26 +1721,34 @@ if (!isAdmin) {
       .querySelectorAll(".nav-item[data-page]")
       .forEach(item => {
 
-        item.addEventListener("click", () => {
+        item.addEventListener(
+          "click",
+          () => {
 
-          showPage(item.dataset.page);
+            showPage(item.dataset.page);
 
-        });
+          }
+        );
 
       });
 
 
-    /* MOBILE MENU */
+    /* ==========================
+       MOBILE MENU
+    ========================== */
 
     document
       .getElementById("menuButton")
-      ?.addEventListener("click", () => {
+      ?.addEventListener(
+        "click",
+        () => {
 
-        document
-          .getElementById("mobileNav")
-          .classList.toggle("open");
+          document
+            .getElementById("mobileNav")
+            .classList.toggle("open");
 
-      });
+        }
+      );
 
 
     /* ==========================
@@ -1931,15 +1760,82 @@ if (!isAdmin) {
       const element =
         document.getElementById("toast");
 
-      element.textContent = message;
+
+      element.textContent =
+        message;
+
 
       element.classList.add("show");
 
-      setTimeout(() => {
 
-        element.classList.remove("show");
+      setTimeout(
+        () => {
 
-      }, 2500);
+          element.classList.remove("show");
+
+        },
+        2500
+      );
+
+    }
+
+
+    /* ==========================
+       STORAGE UPLOAD
+    ========================== */
+
+    async function uploadPortfolioFile(
+      file,
+      folder
+    ) {
+
+      if (!file) return null;
+
+
+      const safeName =
+        file.name
+          .toLowerCase()
+          .replace(
+            /[^a-z0-9.]+/g,
+            "-"
+          );
+
+
+      const filePath =
+        `${folder}/${crypto.randomUUID()}-${safeName}`;
+
+
+      const {
+        error
+      } = await supabase
+        .storage
+        .from("portfolio-media")
+        .upload(
+          filePath,
+          file,
+          {
+            cacheControl: "3600",
+            upsert: false
+          }
+        );
+
+
+      if (error) {
+
+        throw error;
+
+      }
+
+
+      const {
+        data
+      } = supabase
+        .storage
+        .from("portfolio-media")
+        .getPublicUrl(filePath);
+
+
+      return data.publicUrl;
 
     }
 
@@ -1948,40 +1844,13 @@ if (!isAdmin) {
        PROJECTS
     ========================== */
 
-    async function uploadPortfolioFile(file, folder) {
-
-  if (!file) return null;
-
-  const safeName = file.name
-    .toLowerCase()
-    .replace(/[^a-z0-9.]+/g, "-");
-
-  const filePath =
-    `${folder}/${crypto.randomUUID()}-${safeName}`;
-
-  const { error } =
-    await supabase.storage
-      .from("portfolio-media")
-      .upload(filePath, file, {
-        cacheControl: "3600",
-        upsert: false
-      });
-
-  if (error) {
-    throw error;
-  }
-
-  const { data } =
-    supabase.storage
-      .from("portfolio-media")
-      .getPublicUrl(filePath);
-
-  return data.publicUrl;
-}
     async function loadProjects() {
 
       const container =
-        document.getElementById("projectList");
+        document.getElementById(
+          "projectList"
+        );
+
 
       container.textContent =
         "Loading projects...";
@@ -1993,12 +1862,18 @@ if (!isAdmin) {
       } = await supabase
         .from("projects")
         .select("*")
-        .order("sort_order", {
-          ascending: true
-        })
-        .order("created_at", {
-          ascending: false
-        });
+        .order(
+          "sort_order",
+          {
+            ascending: true
+          }
+        )
+        .order(
+          "created_at",
+          {
+            ascending: false
+          }
+        );
 
 
       if (error) {
@@ -2011,13 +1886,18 @@ if (!isAdmin) {
       }
 
 
-      document.getElementById("projectCount")
-        .textContent = data.length;
+      document.getElementById(
+        "projectCount"
+      ).textContent =
+        data.length;
 
 
-      document.getElementById("publishedCount")
-        .textContent =
-          data.filter(p => p.published).length;
+      document.getElementById(
+        "publishedCount"
+      ).textContent =
+        data.filter(
+          project => project.published
+        ).length;
 
 
       if (!data.length) {
@@ -2034,128 +1914,169 @@ if (!isAdmin) {
 
 
       container.innerHTML =
-        data.map(project => `
+        data
+          .map(project => `
 
-          <div class="project-row">
+            <div class="project-row">
 
-            <div>
+              <div>
 
-              <div class="project-name">
+                <div class="project-name">
 
-                ${escapeHtml(project.title)}
+                  ${escapeHtml(
+                    project.title
+                  )}
 
-                <span class="status ${
-                  project.published
-                    ? "live"
-                    : "draft"
-                }">
+                  <span class="status ${
+                    project.published
+                      ? "live"
+                      : "draft"
+                  }">
+
+                    ${
+                      project.published
+                        ? "Published"
+                        : "Draft"
+                    }
+
+                  </span>
+
+                </div>
+
+
+                <div class="project-meta">
 
                   ${
-                    project.published
-                      ? "Published"
-                      : "Draft"
+                    escapeHtml(
+                      project.category || ""
+                    )
                   }
 
-                </span>
+                  ${
+                    project.client_name
+                      ? " · " +
+                        escapeHtml(
+                          project.client_name
+                        )
+                      : ""
+                  }
+
+                </div>
 
               </div>
 
-              <div class="project-meta">
 
-                ${
-                  escapeHtml(
-                    project.category || ""
-                  )
-                }
+              <div class="project-actions">
 
-                ${
-                  project.client_name
-                    ? " · " +
-                      escapeHtml(
-                        project.client_name
-                      )
-                    : ""
-                }
+                <button
+                  class="btn btn-secondary"
+                  onclick="editProject(${project.id})"
+                >
+                  Edit
+                </button>
+
+
+                <button
+                  class="btn btn-danger"
+                  onclick="deleteProject(${project.id})"
+                >
+                  Delete
+                </button>
 
               </div>
 
             </div>
 
-
-            <div class="project-actions">
-
-              <button
-                class="btn btn-secondary"
-                onclick="editProject(${project.id})"
-              >
-                Edit
-              </button>
-
-              <button
-                class="btn btn-danger"
-                onclick="deleteProject(${project.id})"
-              >
-                Delete
-              </button>
-
-            </div>
-
-          </div>
-
-        `).join("");
+          `)
+          .join("");
 
     }
 
 
-    function openProjectModal(project = null) {
+    function openProjectModal(
+      project = null
+    ) {
 
       document
         .getElementById("projectModal")
         .classList.add("open");
 
 
-      document.getElementById("projectId").value =
+      document.getElementById(
+        "projectId"
+      ).value =
         project?.id || "";
 
 
-      document.getElementById("projectTitle").value =
+      document.getElementById(
+        "projectTitle"
+      ).value =
         project?.title || "";
 
 
-      document.getElementById("projectCategory").value =
-        project?.category || "Short Form";
+      document.getElementById(
+        "projectCategory"
+      ).value =
+        project?.category ||
+        "Short Form";
 
 
-      document.getElementById("projectClient").value =
+      document.getElementById(
+        "projectClient"
+      ).value =
         project?.client_name || "";
 
 
-      document.getElementById("projectDescription").value =
+      document.getElementById(
+        "projectDescription"
+      ).value =
         project?.description || "";
 
 
-      document.getElementById("projectVideo").value =
+      document.getElementById(
+        "projectVideo"
+      ).value =
         project?.video_url || "";
 
 
-      document.getElementById("projectThumbnail").value =
+      document.getElementById(
+        "projectThumbnail"
+      ).value =
         project?.thumbnail_url || "";
 
 
-      document.getElementById("projectYear").value =
+      document.getElementById(
+        "projectYear"
+      ).value =
         project?.year || 2026;
 
 
-      document.getElementById("projectOrder").value =
+      document.getElementById(
+        "projectOrder"
+      ).value =
         project?.sort_order || 0;
 
 
-      document.getElementById("projectFeatured").checked =
+      document.getElementById(
+        "projectFeatured"
+      ).checked =
         !!project?.featured;
 
 
-      document.getElementById("projectPublished").checked =
+      document.getElementById(
+        "projectPublished"
+      ).checked =
         !!project?.published;
+
+
+      document.getElementById(
+        "projectVideoFile"
+      ).value = "";
+
+
+      document.getElementById(
+        "projectThumbnailFile"
+      ).value = "";
 
     }
 
@@ -2188,9 +2109,15 @@ if (!isAdmin) {
 
     async function deleteProject(id) {
 
-      if (!confirm(
-        "Delete this project permanently?"
-      )) return;
+      if (
+        !confirm(
+          "Delete this project permanently?"
+        )
+      ) {
+
+        return;
+
+      }
 
 
       const {
@@ -2210,175 +2137,240 @@ if (!isAdmin) {
       }
 
 
-      toast("Project deleted.");
+      toast(
+        "Project deleted."
+      );
+
 
       loadProjects();
 
     }
 
 
-    window.editProject = editProject;
-    window.deleteProject = deleteProject;
+    window.editProject =
+      editProject;
+
+
+    window.deleteProject =
+      deleteProject;
 
 
     document
       .getElementById("projectForm")
-      .addEventListener("submit", async event => {
+      .addEventListener(
+        "submit",
+        async event => {
 
-        event.preventDefault();
-
-
-        const id =
-          document.getElementById("projectId").value;
-        
-        const videoFile =
-  document.getElementById(
-    "projectVideoFile"
-  ).files[0];
-
-const thumbnailFile =
-  document.getElementById(
-    "projectThumbnailFile"
-  ).files[0];
+          event.preventDefault();
 
 
-let videoUrl =
-  document.getElementById(
-    "projectVideo"
-  ).value.trim();
-
-let thumbnailUrl =
-  document.getElementById(
-    "projectThumbnail"
-  ).value.trim();
+          const id =
+            document
+              .getElementById(
+                "projectId"
+              )
+              .value;
 
 
-try {
-
-  if (videoFile) {
-
-    toast("Uploading video...");
-
-    videoUrl =
-      await uploadPortfolioFile(
-        videoFile,
-        "videos"
-      );
-
-  }
-
-  if (thumbnailFile) {
-
-    toast("Uploading thumbnail...");
-
-    thumbnailUrl =
-      await uploadPortfolioFile(
-        thumbnailFile,
-        "thumbnails"
-      );
-
-  }
-
-} catch (uploadError) {
-
-  toast(
-    "Upload failed: " +
-    uploadError.message
-  );
-
-  return;
-
-}
+          const videoFile =
+            document
+              .getElementById(
+                "projectVideoFile"
+              )
+              .files[0];
 
 
-        const project = {
-
-          title:
-            document.getElementById(
-              "projectTitle"
-            ).value.trim(),
-
-          category:
-            document.getElementById(
-              "projectCategory"
-            ).value,
-
-          client_name:
-            document.getElementById(
-              "projectClient"
-            ).value.trim(),
-
-          description:
-            document.getElementById(
-              "projectDescription"
-            ).value.trim(),
-
-          video_url: videoUrl,
-
-thumbnail_url: thumbnailUrl,
-
-          year:
-            Number(
-              document.getElementById(
-                "projectYear"
-              ).value
-            ),
-
-          sort_order:
-            Number(
-              document.getElementById(
-                "projectOrder"
-              ).value
-            ),
-
-          featured:
-            document.getElementById(
-              "projectFeatured"
-            ).checked,
-
-          published:
-            document.getElementById(
-              "projectPublished"
-            ).checked
-
-        };
+          const thumbnailFile =
+            document
+              .getElementById(
+                "projectThumbnailFile"
+              )
+              .files[0];
 
 
-        let result;
+          let videoUrl =
+            document
+              .getElementById(
+                "projectVideo"
+              )
+              .value
+              .trim();
 
 
-        if (id) {
+          let thumbnailUrl =
+            document
+              .getElementById(
+                "projectThumbnail"
+              )
+              .value
+              .trim();
 
-          result = await supabase
-            .from("projects")
-            .update(project)
-            .eq("id", id);
 
-        } else {
+          try {
 
-          result = await supabase
-            .from("projects")
-            .insert(project);
+            if (videoFile) {
+
+              toast(
+                "Uploading video..."
+              );
+
+
+              videoUrl =
+                await uploadPortfolioFile(
+                  videoFile,
+                  "videos"
+                );
+
+            }
+
+
+            if (thumbnailFile) {
+
+              toast(
+                "Uploading thumbnail..."
+              );
+
+
+              thumbnailUrl =
+                await uploadPortfolioFile(
+                  thumbnailFile,
+                  "thumbnails"
+                );
+
+            }
+
+          } catch (uploadError) {
+
+            toast(
+              "Upload failed: " +
+              uploadError.message
+            );
+
+            return;
+
+          }
+
+
+          const project = {
+
+            title:
+              document
+                .getElementById(
+                  "projectTitle"
+                )
+                .value
+                .trim(),
+
+            category:
+              document
+                .getElementById(
+                  "projectCategory"
+                )
+                .value,
+
+            client_name:
+              document
+                .getElementById(
+                  "projectClient"
+                )
+                .value
+                .trim(),
+
+            description:
+              document
+                .getElementById(
+                  "projectDescription"
+                )
+                .value
+                .trim(),
+
+            video_url:
+              videoUrl,
+
+            thumbnail_url:
+              thumbnailUrl,
+
+            year:
+              Number(
+                document
+                  .getElementById(
+                    "projectYear"
+                  )
+                  .value
+              ),
+
+            sort_order:
+              Number(
+                document
+                  .getElementById(
+                    "projectOrder"
+                  )
+                  .value
+              ),
+
+            featured:
+              document
+                .getElementById(
+                  "projectFeatured"
+                )
+                .checked,
+
+            published:
+              document
+                .getElementById(
+                  "projectPublished"
+                )
+                .checked
+
+          };
+
+
+          let result;
+
+
+          if (id) {
+
+            result =
+              await supabase
+                .from("projects")
+                .update(project)
+                .eq("id", id);
+
+          } else {
+
+            result =
+              await supabase
+                .from("projects")
+                .insert(project);
+
+          }
+
+
+          if (result.error) {
+
+            toast(
+              result.error.message
+            );
+
+            return;
+
+          }
+
+
+          closeModal(
+            "projectModal"
+          );
+
+
+          toast(
+            "Project saved."
+          );
+
+
+          loadProjects();
 
         }
-
-
-        if (result.error) {
-
-          toast(result.error.message);
-
-          return;
-
-        }
-
-
-        closeModal("projectModal");
-
-        toast("Project saved.");
-
-        loadProjects();
-
-      });
+      );
 
 
     /* ==========================
@@ -2403,9 +2395,12 @@ thumbnail_url: thumbnailUrl,
       } = await supabase
         .from("testimonials")
         .select("*")
-        .order("sort_order", {
-          ascending: true
-        });
+        .order(
+          "sort_order",
+          {
+            ascending: true
+          }
+        );
 
 
       if (error) {
@@ -2420,7 +2415,8 @@ thumbnail_url: thumbnailUrl,
 
       document.getElementById(
         "testimonialCount"
-      ).textContent = data.length;
+      ).textContent =
+        data.length;
 
 
       if (!data.length) {
@@ -2437,131 +2433,158 @@ thumbnail_url: thumbnailUrl,
 
 
       container.innerHTML =
-        data.map(item => `
+        data
+          .map(item => `
 
-          <div class="project-row">
+            <div class="project-row">
 
-            <div>
+              <div>
 
-              <div class="project-name">
+                <div class="project-name">
 
-                ${escapeHtml(
-                  item.client_name
-                )}
+                  ${escapeHtml(
+                    item.client_name
+                  )}
 
-                <span class="status ${
-                  item.published
-                    ? "live"
-                    : "draft"
-                }">
+                  <span class="status ${
+                    item.published
+                      ? "live"
+                      : "draft"
+                  }">
+
+                    ${
+                      item.published
+                        ? "Published"
+                        : "Draft"
+                    }
+
+                  </span>
+
+                </div>
+
+
+                <div class="project-meta">
 
                   ${
-                    item.published
-                      ? "Published"
-                      : "Draft"
+                    escapeHtml(
+                      item.company || ""
+                    )
                   }
 
-                </span>
+                </div>
 
               </div>
 
-              <div class="project-meta">
 
-                ${
-                  escapeHtml(
-                    item.company || ""
-                  )
-                }
+              <div class="project-actions">
+
+                <button
+                  class="btn btn-secondary"
+                  onclick="editTestimonial(${item.id})"
+                >
+                  Edit
+                </button>
+
+
+                <button
+                  class="btn btn-danger"
+                  onclick="deleteTestimonial(${item.id})"
+                >
+                  Delete
+                </button>
 
               </div>
 
             </div>
 
-
-            <div class="project-actions">
-
-              <button
-                class="btn btn-secondary"
-                onclick="editTestimonial(${item.id})"
-              >
-                Edit
-              </button>
-
-              <button
-                class="btn btn-danger"
-                onclick="deleteTestimonial(${item.id})"
-              >
-                Delete
-              </button>
-
-            </div>
-
-          </div>
-
-        `).join("");
+          `)
+          .join("");
 
     }
 
 
-    function openTestimonialModal(item = null) {
+    function openTestimonialModal(
+      item = null
+    ) {
 
-  document
-    .getElementById("testimonialModal")
-    .classList.add("open");
-
-
-  document.getElementById(
-    "testimonialId"
-  ).value = item?.id || "";
-
-
-  document.getElementById(
-    "clientName"
-  ).value = item?.client_name || "";
+      document
+        .getElementById(
+          "testimonialModal"
+        )
+        .classList.add("open");
 
 
-  document.getElementById(
-    "clientCompany"
-  ).value = item?.company || "";
-
-      
       document.getElementById(
-  "testimonialDate"
-).value =
-  item?.testimonial_date || "";
-
-      
-  document.getElementById(
-    "testimonialQuote"
-  ).value = item?.quote || "";
-
-      
-  document.getElementById(
-    "clientPhoto"
-  ).value =
-    item?.client_photo_url || "";
+        "testimonialId"
+      ).value =
+        item?.id || "";
 
 
-  document.getElementById(
-    "testimonialScreenshot"
-  ).value =
-    item?.screenshot_url || "";
+      document.getElementById(
+        "clientName"
+      ).value =
+        item?.client_name || "";
 
 
-  document.getElementById(
-    "testimonialOrder"
-  ).value =
-    item?.sort_order || 0;
+      document.getElementById(
+        "clientCompany"
+      ).value =
+        item?.company || "";
 
 
-  document.getElementById(
-    "testimonialPublished"
-  ).value =
-    String(!!item?.published);
-}
+      document.getElementById(
+        "testimonialDate"
+      ).value =
+        item?.testimonial_date || "";
 
 
-    async function editTestimonial(id) {
+      document.getElementById(
+        "testimonialQuote"
+      ).value =
+        item?.quote || "";
+
+
+      document.getElementById(
+        "clientPhoto"
+      ).value =
+        item?.client_photo_url || "";
+
+
+      document.getElementById(
+        "testimonialScreenshot"
+      ).value =
+        item?.screenshot_url || "";
+
+
+      document.getElementById(
+        "testimonialOrder"
+      ).value =
+        item?.sort_order || 0;
+
+
+      document.getElementById(
+        "testimonialPublished"
+      ).value =
+        String(
+          !!item?.published
+        );
+
+
+      document.getElementById(
+        "clientPhotoFile"
+      ).value = "";
+
+
+      document.getElementById(
+        "testimonialScreenshotFile"
+      ).value = "";
+
+    }
+
+
+    async function editTestimonial(
+      id
+    ) {
 
       const {
         data,
@@ -2575,23 +2598,35 @@ thumbnail_url: thumbnailUrl,
 
       if (error) {
 
-        toast(error.message);
+        toast(
+          error.message
+        );
 
         return;
 
       }
 
 
-      openTestimonialModal(data);
+      openTestimonialModal(
+        data
+      );
 
     }
 
 
-    async function deleteTestimonial(id) {
+    async function deleteTestimonial(
+      id
+    ) {
 
-      if (!confirm(
-        "Delete this testimonial permanently?"
-      )) return;
+      if (
+        !confirm(
+          "Delete this testimonial permanently?"
+        )
+      ) {
+
+        return;
+
+      }
 
 
       const {
@@ -2604,14 +2639,19 @@ thumbnail_url: thumbnailUrl,
 
       if (error) {
 
-        toast(error.message);
+        toast(
+          error.message
+        );
 
         return;
 
       }
 
 
-      toast("Testimonial deleted.");
+      toast(
+        "Testimonial deleted."
+      );
+
 
       loadTestimonials();
 
@@ -2621,214 +2661,249 @@ thumbnail_url: thumbnailUrl,
     window.editTestimonial =
       editTestimonial;
 
+
     window.deleteTestimonial =
       deleteTestimonial;
 
 
     document
-  .getElementById("testimonialForm")
-  .addEventListener("submit", async event => {
+      .getElementById(
+        "testimonialForm"
+      )
+      .addEventListener(
+        "submit",
+        async event => {
 
-    event.preventDefault();
-
-    const id =
-      document.getElementById(
-        "testimonialId"
-      ).value;
-
-
-    const clientName =
-      document.getElementById(
-        "clientName"
-      ).value.trim();
+          event.preventDefault();
 
 
-    const company =
-      document.getElementById(
-        "clientCompany"
-      ).value.trim();
+          const id =
+            document
+              .getElementById(
+                "testimonialId"
+              )
+              .value;
 
 
-    const testimonialDate =
-      document.getElementById(
-        "testimonialDate"
-      ).value || null;
+          const clientName =
+            document
+              .getElementById(
+                "clientName"
+              )
+              .value
+              .trim();
 
 
-    const quote =
-      document.getElementById(
-        "testimonialQuote"
-      ).value.trim();
+          const company =
+            document
+              .getElementById(
+                "clientCompany"
+              )
+              .value
+              .trim();
 
 
-    const order =
-      Number(
-        document.getElementById(
-          "testimonialOrder"
-        ).value
-      ) || 0;
+          const testimonialDate =
+            document
+              .getElementById(
+                "testimonialDate"
+              )
+              .value ||
+            null;
 
 
-    const published =
-      document.getElementById(
-        "testimonialPublished"
-      ).value === "true";
+          const quote =
+            document
+              .getElementById(
+                "testimonialQuote"
+              )
+              .value
+              .trim();
 
 
-    const clientPhotoFile =
-      document.getElementById(
-        "clientPhotoFile"
-      ).files[0];
+          const order =
+            Number(
+              document
+                .getElementById(
+                  "testimonialOrder"
+                )
+                .value
+            ) || 0;
 
 
-    const screenshotFile =
-      document.getElementById(
-        "testimonialScreenshotFile"
-      ).files[0];
+          const published =
+            document
+              .getElementById(
+                "testimonialPublished"
+              )
+              .value ===
+            "true";
 
 
-    let clientPhotoUrl =
-      document.getElementById(
-        "clientPhoto"
-      ).value.trim();
+          const clientPhotoFile =
+            document
+              .getElementById(
+                "clientPhotoFile"
+              )
+              .files[0];
 
 
-    let screenshotUrl =
-      document.getElementById(
-        "testimonialScreenshot"
-      ).value.trim();
+          const screenshotFile =
+            document
+              .getElementById(
+                "testimonialScreenshotFile"
+              )
+              .files[0];
 
 
-    try {
-
-      /* =========================
-         UPLOAD CLIENT PHOTO
-      ========================= */
-
-      if (clientPhotoFile) {
-
-        toast(
-          "Uploading client photo..."
-        );
-
-        clientPhotoUrl =
-          await uploadPortfolioFile(
-            clientPhotoFile,
-            "client-photos"
-          );
-
-      }
+          let clientPhotoUrl =
+            document
+              .getElementById(
+                "clientPhoto"
+              )
+              .value
+              .trim();
 
 
-      /* =========================
-         UPLOAD SCREENSHOT
-      ========================= */
-
-      if (screenshotFile) {
-
-        toast(
-          "Uploading conversation screenshot..."
-        );
-
-        screenshotUrl =
-          await uploadPortfolioFile(
-            screenshotFile,
-            "testimonials"
-          );
-
-      }
+          let screenshotUrl =
+            document
+              .getElementById(
+                "testimonialScreenshot"
+              )
+              .value
+              .trim();
 
 
-      /* =========================
-         SAVE TESTIMONIAL
-      ========================= */
+          try {
 
-      const testimonial = {
+            if (clientPhotoFile) {
 
-        client_name:
-          clientName,
-
-        company:
-          company,
-
-        testimonial_date:
-          testimonialDate,
-
-        quote:
-          quote,
-
-        client_photo_url:
-          clientPhotoUrl,
-
-        screenshot_url:
-          screenshotUrl,
-
-        sort_order:
-          order,
-
-        published:
-          published
-
-      };
+              toast(
+                "Uploading client photo..."
+              );
 
 
-      let result;
+              clientPhotoUrl =
+                await uploadPortfolioFile(
+                  clientPhotoFile,
+                  "client-photos"
+                );
+
+            }
 
 
-      if (id) {
+            if (screenshotFile) {
 
-        result =
-          await supabase
-            .from("testimonials")
-            .update(testimonial)
-            .eq("id", id);
-
-      } else {
-
-        result =
-          await supabase
-            .from("testimonials")
-            .insert(testimonial);
-
-      }
+              toast(
+                "Uploading conversation screenshot..."
+              );
 
 
-      if (result.error) {
-        throw result.error;
-      }
+              screenshotUrl =
+                await uploadPortfolioFile(
+                  screenshotFile,
+                  "testimonials"
+                );
+
+            }
 
 
-      toast(
-        "Testimonial saved successfully."
+            const testimonial = {
+
+              client_name:
+                clientName,
+
+              company:
+                company,
+
+              testimonial_date:
+                testimonialDate,
+
+              quote:
+                quote,
+
+              client_photo_url:
+                clientPhotoUrl,
+
+              screenshot_url:
+                screenshotUrl,
+
+              sort_order:
+                order,
+
+              published:
+                published
+
+            };
+
+
+            let result;
+
+
+            if (id) {
+
+              result =
+                await supabase
+                  .from("testimonials")
+                  .update(
+                    testimonial
+                  )
+                  .eq(
+                    "id",
+                    id
+                  );
+
+            } else {
+
+              result =
+                await supabase
+                  .from("testimonials")
+                  .insert(
+                    testimonial
+                  );
+
+            }
+
+
+            if (result.error) {
+
+              throw result.error;
+
+            }
+
+
+            toast(
+              "Testimonial saved successfully."
+            );
+
+
+            document
+              .getElementById(
+                "testimonialModal"
+              )
+              .classList
+              .remove("open");
+
+
+            await loadTestimonials();
+
+          } catch (error) {
+
+            console.error(
+              "Testimonial save error:",
+              error
+            );
+
+
+            toast(
+              "Testimonial save failed: " +
+              error.message
+            );
+
+          }
+
+        }
       );
-
-
-      document
-        .getElementById(
-          "testimonialModal"
-        )
-        .classList.remove("open");
-
-
-      await loadTestimonials();
-
-
-    } catch (error) {
-
-      console.error(
-        "Testimonial save error:",
-        error
-      );
-
-
-      toast(
-        "Testimonial save failed: " +
-        error.message
-      );
-
-    }
-
-  });
 
 
     /* ==========================
@@ -2849,14 +2924,20 @@ thumbnail_url: thumbnailUrl,
 
       if (error) {
 
-        toast(error.message);
+        toast(
+          error.message
+        );
 
         return;
 
       }
 
 
-      if (!data) return;
+      if (!data) {
+
+        return;
+
+      }
 
 
       document.getElementById(
@@ -2922,110 +3003,157 @@ thumbnail_url: thumbnailUrl,
 
 
     document
-      .getElementById("contentForm")
-      .addEventListener("submit", async event => {
+      .getElementById(
+        "contentForm"
+      )
+      .addEventListener(
+        "submit",
+        async event => {
 
-        event.preventDefault();
-
-
-        const {
-          data: existing
-        } = await supabase
-          .from("site_content")
-          .select("id")
-          .limit(1)
-          .maybeSingle();
+          event.preventDefault();
 
 
-        const content = {
-
-          hero_title:
-            document.getElementById(
-              "heroTitle"
-            ).value.trim(),
-
-          hero_description:
-            document.getElementById(
-              "heroDescription"
-            ).value.trim(),
-
-          about_title:
-            document.getElementById(
-              "aboutTitle"
-            ).value.trim(),
-
-          about_text:
-            document.getElementById(
-              "aboutText"
-            ).value.trim(),
-
-          contact_email:
-            document.getElementById(
-              "contactEmail"
-            ).value.trim(),
-
-          whatsapp_number:
-            document.getElementById(
-              "whatsappNumber"
-            ).value.trim(),
-
-          instagram_url:
-            document.getElementById(
-              "instagramUrl"
-            ).value.trim(),
-
-          twitter_url:
-            document.getElementById(
-              "twitterUrl"
-            ).value.trim(),
-
-          linkedin_url:
-            document.getElementById(
-              "linkedinUrl"
-            ).value.trim(),
-
-          youtube_url:
-            document.getElementById(
-              "youtubeUrl"
-            ).value.trim(),
-
-          updated_at:
-            new Date().toISOString()
-
-        };
-
-
-        let result;
-
-
-        if (existing) {
-
-          result = await supabase
+          const {
+            data: existing
+          } = await supabase
             .from("site_content")
-            .update(content)
-            .eq("id", existing.id);
+            .select("id")
+            .limit(1)
+            .maybeSingle();
 
-        } else {
 
-          result = await supabase
-            .from("site_content")
-            .insert(content);
+          const content = {
+
+            hero_title:
+              document
+                .getElementById(
+                  "heroTitle"
+                )
+                .value
+                .trim(),
+
+            hero_description:
+              document
+                .getElementById(
+                  "heroDescription"
+                )
+                .value
+                .trim(),
+
+            about_title:
+              document
+                .getElementById(
+                  "aboutTitle"
+                )
+                .value
+                .trim(),
+
+            about_text:
+              document
+                .getElementById(
+                  "aboutText"
+                )
+                .value
+                .trim(),
+
+            contact_email:
+              document
+                .getElementById(
+                  "contactEmail"
+                )
+                .value
+                .trim(),
+
+            whatsapp_number:
+              document
+                .getElementById(
+                  "whatsappNumber"
+                )
+                .value
+                .trim(),
+
+            instagram_url:
+              document
+                .getElementById(
+                  "instagramUrl"
+                )
+                .value
+                .trim(),
+
+            twitter_url:
+              document
+                .getElementById(
+                  "twitterUrl"
+                )
+                .value
+                .trim(),
+
+            linkedin_url:
+              document
+                .getElementById(
+                  "linkedinUrl"
+                )
+                .value
+                .trim(),
+
+            youtube_url:
+              document
+                .getElementById(
+                  "youtubeUrl"
+                )
+                .value
+                .trim(),
+
+            updated_at:
+              new Date()
+                .toISOString()
+
+          };
+
+
+          let result;
+
+
+          if (existing) {
+
+            result =
+              await supabase
+                .from("site_content")
+                .update(content)
+                .eq(
+                  "id",
+                  existing.id
+                );
+
+          } else {
+
+            result =
+              await supabase
+                .from("site_content")
+                .insert(
+                  content
+                );
+
+          }
+
+
+          if (result.error) {
+
+            toast(
+              result.error.message
+            );
+
+            return;
+
+          }
+
+
+          toast(
+            "Site content saved."
+          );
 
         }
-
-
-        if (result.error) {
-
-          toast(result.error.message);
-
-          return;
-
-        }
-
-
-        toast("Site content saved.");
-
-      });
+      );
 
 
     /* ==========================
@@ -3034,23 +3162,35 @@ thumbnail_url: thumbnailUrl,
 
     function closeModal(id) {
 
-      document
-        .getElementById(id)
-        .classList.remove("open");
+      const modal =
+        document.getElementById(id);
+
+
+      if (modal) {
+
+        modal.classList.remove(
+          "open"
+        );
+
+      }
 
     }
 
 
     document
-      .querySelectorAll("[data-close]")
+      .querySelectorAll(
+        "[data-close]"
+      )
       .forEach(button => {
 
         button.addEventListener(
           "click",
           () => {
+
             closeModal(
               button.dataset.close
             );
+
           }
         );
 
@@ -3058,20 +3198,12 @@ thumbnail_url: thumbnailUrl,
 
 
     document
-      .getElementById("addProjectTop")
-      .addEventListener(
-        "click",
-        () => openProjectModal()
-      );
-
-
-    document
-      .getElementById("newProjectButton")
+      .getElementById(
+        "addProjectTop"
+      )
       .addEventListener(
         "click",
         () => {
-
-          showPage("projects");
 
           openProjectModal();
 
@@ -3080,20 +3212,48 @@ thumbnail_url: thumbnailUrl,
 
 
     document
-      .getElementById("addTestimonialTop")
-      .addEventListener(
-        "click",
-        () => openTestimonialModal()
-      );
-
-
-    document
-      .getElementById("newTestimonialButton")
+      .getElementById(
+        "newProjectButton"
+      )
       .addEventListener(
         "click",
         () => {
 
-          showPage("testimonials");
+          showPage(
+            "projects"
+          );
+
+          openProjectModal();
+
+        }
+      );
+
+
+    document
+      .getElementById(
+        "addTestimonialTop"
+      )
+      .addEventListener(
+        "click",
+        () => {
+
+          openTestimonialModal();
+
+        }
+      );
+
+
+    document
+      .getElementById(
+        "newTestimonialButton"
+      )
+      .addEventListener(
+        "click",
+        () => {
+
+          showPage(
+            "testimonials"
+          );
 
           openTestimonialModal();
 
@@ -3109,19 +3269,31 @@ thumbnail_url: thumbnailUrl,
 
       await supabase.auth.signOut();
 
-      window.location.href = "/admin/";
+
+      window.location.href =
+        "/admin/";
 
     }
 
 
     document
-      .getElementById("logout")
-      .addEventListener("click", logout);
+      .getElementById(
+        "logout"
+      )
+      .addEventListener(
+        "click",
+        logout
+      );
 
 
     document
-      .getElementById("mobileLogout")
-      .addEventListener("click", logout);
+      .getElementById(
+        "mobileLogout"
+      )
+      .addEventListener(
+        "click",
+        logout
+      );
 
 
     /* ==========================
@@ -3130,12 +3302,29 @@ thumbnail_url: thumbnailUrl,
 
     function escapeHtml(value) {
 
-      return String(value ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+      return String(
+        value ?? ""
+      )
+        .replaceAll(
+          "&",
+          "&amp;"
+        )
+        .replaceAll(
+          "<",
+          "&lt;"
+        )
+        .replaceAll(
+          ">",
+          "&gt;"
+        )
+        .replaceAll(
+          '"',
+          "&quot;"
+        )
+        .replaceAll(
+          "'",
+          "&#039;"
+        );
 
     }
 
