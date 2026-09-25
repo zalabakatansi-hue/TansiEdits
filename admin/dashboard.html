@@ -1330,16 +1330,64 @@
         await supabase.rpc("is_admin");
 
 
-      if (error || !isAdmin) {
+      if (error) {
 
-        await supabase.auth.signOut();
+  document.body.innerHTML = `
+    <div style="
+      min-height:100vh;
+      background:#070707;
+      color:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:25px;
+      font-family:Arial,sans-serif;
+    ">
+      <div style="max-width:500px">
+        <h1 style="margin-bottom:15px">
+          Admin check failed
+        </h1>
 
-        window.location.href = "/admin/";
+        <p style="color:#999;line-height:1.6">
+          ${error.message}
+        </p>
+      </div>
+    </div>
+  `;
 
-        return false;
+  return false;
+}
 
-      }
+if (!isAdmin) {
 
+  await supabase.auth.signOut();
+
+  document.body.innerHTML = `
+    <div style="
+      min-height:100vh;
+      background:#070707;
+      color:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:25px;
+      font-family:Arial,sans-serif;
+    ">
+      <div style="max-width:500px">
+        <h1 style="margin-bottom:15px">
+          Not authorized
+        </h1>
+
+        <p style="color:#999;line-height:1.6">
+          Your Supabase account is authenticated,
+          but it is not registered as a portfolio administrator.
+        </p>
+      </div>
+    </div>
+  `;
+
+  return false;
+}
 
       return true;
 
