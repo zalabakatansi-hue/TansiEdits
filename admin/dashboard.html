@@ -1,0 +1,2452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dashboard — Tansi Cyril</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #070707;
+      --panel: #101010;
+      --panel2: #151515;
+      --text: #f5f5f0;
+      --muted: #858585;
+      --line: rgba(255,255,255,.09);
+      --accent: #dfff00;
+      --danger: #ff6262;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(
+          circle at 90% 0%,
+          rgba(223,255,0,.07),
+          transparent 30%
+        ),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, Arial, sans-serif;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* SIDEBAR */
+
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 240px;
+      border-right: 1px solid var(--line);
+      padding: 28px 18px;
+      background: rgba(7,7,7,.92);
+      backdrop-filter: blur(20px);
+      z-index: 20;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: -.04em;
+      margin-bottom: 45px;
+      padding: 0 12px;
+    }
+
+    .brand small {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 9px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .nav-item {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: #888;
+      padding: 13px 12px;
+      text-align: left;
+      border-radius: 9px;
+      margin-bottom: 5px;
+      font-size: 13px;
+    }
+
+    .nav-item:hover,
+    .nav-item.active {
+      background: var(--panel);
+      color: white;
+    }
+
+    .logout {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 25px;
+      color: #888;
+    }
+
+    /* MAIN */
+
+    .main {
+      margin-left: 240px;
+      padding: 35px;
+      max-width: 1400px;
+    }
+
+    .mobile-header {
+      display: none;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 40px;
+    }
+
+    .eyebrow {
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: clamp(35px, 5vw, 65px);
+      letter-spacing: -.06em;
+      line-height: .9;
+    }
+
+    .view-site {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 12px;
+    }
+
+    /* STATS */
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 50px;
+    }
+
+    .stat {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 22px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+
+    .stat-number {
+      font-size: 38px;
+      font-weight: 700;
+      letter-spacing: -.05em;
+      margin-top: 15px;
+    }
+
+    /* PANELS */
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .panel-title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .panel-description {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    /* BUTTONS */
+
+    .btn {
+      border: 0;
+      border-radius: 9px;
+      padding: 11px 15px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+    }
+
+    .btn-secondary {
+      background: #1c1c1c;
+      color: white;
+      border: 1px solid var(--line);
+    }
+
+    .btn-danger {
+      background: rgba(255,98,98,.1);
+      color: var(--danger);
+      border: 1px solid rgba(255,98,98,.2);
+    }
+
+    /* FORMS */
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      color: #aaa;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: 8px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      background: #0b0b0b;
+      color: white;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      padding: 13px;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: rgba(255,255,255,.35);
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    /* PROJECT LIST */
+
+    .project-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 16px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .project-row:first-child {
+      border-top: 0;
+    }
+
+    .project-name {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .project-meta {
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 5px;
+    }
+
+    .project-actions {
+      display: flex;
+      gap: 7px;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 5px 8px;
+      border-radius: 100px;
+      font-size: 9px;
+      text-transform: uppercase;
+      margin-left: 7px;
+    }
+
+    .status.live {
+      color: #dfff00;
+      background: rgba(223,255,0,.08);
+    }
+
+    .status.draft {
+      color: #888;
+      background: #1b1b1b;
+    }
+
+    /* MODAL */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.78);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-content {
+      width: 100%;
+      max-width: 650px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: #111;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 25px;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .close {
+      border: 0;
+      background: #1c1c1c;
+      color: white;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+    }
+
+    .checkbox {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: #aaa;
+      font-size: 12px;
+    }
+
+    .checkbox input {
+      width: auto;
+    }
+
+    #toast {
+      position: fixed;
+      right: 25px;
+      bottom: 25px;
+      background: white;
+      color: black;
+      padding: 13px 17px;
+      border-radius: 9px;
+      font-size: 12px;
+      transform: translateY(100px);
+      transition: transform .3s ease;
+      z-index: 200;
+    }
+
+    #toast.show {
+      transform: translateY(0);
+    }
+
+    /* MOBILE */
+
+    @media(max-width: 800px) {
+
+      .sidebar {
+        display: none;
+      }
+
+      .main {
+        margin-left: 0;
+        padding: 20px;
+        padding-top: 85px;
+      }
+
+      .mobile-header {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 65px;
+        background: rgba(7,7,7,.9);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--line);
+        z-index: 50;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+      }
+
+      .mobile-brand {
+        font-weight: 800;
+      }
+
+      .mobile-menu {
+        border: 1px solid var(--line);
+        background: #111;
+        color: white;
+        border-radius: 8px;
+        padding: 9px 12px;
+      }
+
+      .mobile-nav {
+        position: fixed;
+        top: 65px;
+        left: 0;
+        right: 0;
+        background: #0c0c0c;
+        border-bottom: 1px solid var(--line);
+        padding: 10px;
+        z-index: 49;
+        display: none;
+      }
+
+      .mobile-nav.open {
+        display: block;
+      }
+
+      .mobile-nav .nav-item {
+        padding: 15px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stat-number {
+        font-size: 30px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .project-row {
+        align-items: flex-start;
+      }
+
+      .project-actions {
+        flex-direction: column;
+      }
+
+      .topbar {
+        align-items: flex-start;
+      }
+
+      .view-site {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- MOBILE HEADER -->
+
+  <header class="mobile-header">
+
+    <div class="mobile-brand">
+      TC / ADMIN
+    </div>
+
+    <button class="mobile-menu" id="menuButton">
+      Menu
+    </button>
+
+  </header>
+
+
+  <!-- MOBILE NAV -->
+
+  <div class="mobile-nav" id="mobileNav">
+
+    <button class="nav-item active" data-page="overview">
+      Overview
+    </button>
+
+    <button class="nav-item" data-page="projects">
+      Projects / Showreels
+    </button>
+
+    <button class="nav-item" data-page="testimonials">
+      Testimonials
+    </button>
+
+    <button class="nav-item" data-page="content">
+      Site Content
+    </button>
+
+    <button class="nav-item" id="mobileLogout">
+      Logout
+    </button>
+
+  </div>
+
+
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar">
+
+    <div class="brand">
+      TC / ADMIN
+      <small>Private portfolio CMS</small>
+    </div>
+
+    <button class="nav-item active" data-page="overview">
+      Overview
+    </button>
+
+    <button class="nav-item" data-page="projects">
+      Projects / Showreels
+    </button>
+
+    <button class="nav-item" data-page="testimonials">
+      Testimonials
+    </button>
+
+    <button class="nav-item" data-page="content">
+      Site Content
+    </button>
+
+    <button class="nav-item logout" id="logout">
+      Logout
+    </button>
+
+  </aside>
+
+
+  <!-- MAIN -->
+
+  <main class="main">
+
+
+    <!-- OVERVIEW -->
+
+    <section class="page active" id="overview">
+
+      <div class="topbar">
+
+        <div>
+          <div class="eyebrow">
+            Dashboard
+          </div>
+
+          <h1>
+            Control room.
+          </h1>
+        </div>
+
+        <a
+          href="/"
+          target="_blank"
+          class="view-site"
+        >
+          View portfolio ↗
+        </a>
+
+      </div>
+
+
+      <div class="stats">
+
+        <div class="stat">
+          <div class="stat-label">
+            Projects
+          </div>
+
+          <div class="stat-number" id="projectCount">
+            —
+          </div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-label">
+            Published
+          </div>
+
+          <div class="stat-number" id="publishedCount">
+            —
+          </div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-label">
+            Testimonials
+          </div>
+
+          <div class="stat-number" id="testimonialCount">
+            —
+          </div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-label">
+            Status
+          </div>
+
+          <div
+            class="stat-number"
+            style="font-size:22px"
+          >
+            ONLINE
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div class="panel-header">
+
+          <div>
+            <div class="panel-title">
+              Quick actions
+            </div>
+
+            <div class="panel-description">
+              Manage your portfolio from your phone.
+            </div>
+          </div>
+
+        </div>
+
+        <div class="form-actions">
+
+          <button
+            class="btn btn-primary"
+            id="newProjectButton"
+          >
+            + New project
+          </button>
+
+          <button
+            class="btn btn-secondary"
+            id="newTestimonialButton"
+          >
+            + Testimonial
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PROJECTS -->
+
+    <section class="page" id="projects">
+
+      <div class="topbar">
+
+        <div>
+          <div class="eyebrow">
+            Portfolio
+          </div>
+
+          <h1>
+            Projects.
+          </h1>
+        </div>
+
+        <button
+          class="btn btn-primary"
+          id="addProjectTop"
+        >
+          + Add project
+        </button>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div id="projectList">
+          Loading projects...
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- TESTIMONIALS -->
+
+    <section class="page" id="testimonials">
+
+      <div class="topbar">
+
+        <div>
+          <div class="eyebrow">
+            Social proof
+          </div>
+
+          <h1>
+            Testimonials.
+          </h1>
+        </div>
+
+        <button
+          class="btn btn-primary"
+          id="addTestimonialTop"
+        >
+          + Add testimonial
+        </button>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div id="testimonialList">
+          Loading testimonials...
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SITE CONTENT -->
+
+    <section class="page" id="content">
+
+      <div class="topbar">
+
+        <div>
+          <div class="eyebrow">
+            Website
+          </div>
+
+          <h1>
+            Site content.
+          </h1>
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div class="panel-header">
+
+          <div>
+            <div class="panel-title">
+              Main information
+            </div>
+
+            <div class="panel-description">
+              Change what visitors see without editing the website code.
+            </div>
+          </div>
+
+        </div>
+
+
+        <form id="contentForm">
+
+          <div class="form-grid">
+
+            <div class="field full">
+              <label>Hero title</label>
+
+              <input
+                id="heroTitle"
+                placeholder="Cut. Shape. Impact."
+              >
+            </div>
+
+
+            <div class="field full">
+              <label>Hero description</label>
+
+              <textarea
+                id="heroDescription"
+                placeholder="Your short introduction..."
+              ></textarea>
+            </div>
+
+
+            <div class="field full">
+              <label>About title</label>
+
+              <input
+                id="aboutTitle"
+                placeholder="Good editing isn't just cutting."
+              >
+            </div>
+
+
+            <div class="field full">
+              <label>About text</label>
+
+              <textarea
+                id="aboutText"
+              ></textarea>
+            </div>
+
+
+            <div class="field">
+              <label>Contact email</label>
+
+              <input
+                id="contactEmail"
+                type="email"
+              >
+            </div>
+
+
+            <div class="field">
+              <label>WhatsApp number</label>
+
+              <input
+                id="whatsappNumber"
+                placeholder="234XXXXXXXXXX"
+              >
+            </div>
+
+
+            <div class="field">
+              <label>Instagram</label>
+
+              <input
+                id="instagramUrl"
+                placeholder="https://instagram.com/..."
+              >
+            </div>
+
+
+            <div class="field">
+              <label>X / Twitter</label>
+
+              <input
+                id="twitterUrl"
+                placeholder="https://x.com/..."
+              >
+            </div>
+
+
+            <div class="field">
+              <label>LinkedIn</label>
+
+              <input
+                id="linkedinUrl"
+                placeholder="https://linkedin.com/in/..."
+              >
+            </div>
+
+
+            <div class="field">
+              <label>YouTube</label>
+
+              <input
+                id="youtubeUrl"
+                placeholder="https://youtube.com/..."
+              >
+            </div>
+
+          </div>
+
+
+          <div class="form-actions">
+
+            <button
+              class="btn btn-primary"
+              type="submit"
+            >
+              Save changes
+            </button>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- PROJECT MODAL -->
+
+  <div class="modal" id="projectModal">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+
+        <div>
+          <div class="eyebrow">
+            Portfolio
+          </div>
+
+          <div class="panel-title">
+            Project
+          </div>
+        </div>
+
+        <button
+          class="close"
+          data-close="projectModal"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <form id="projectForm">
+
+        <input
+          type="hidden"
+          id="projectId"
+        >
+
+        <div class="field">
+          <label>Title</label>
+
+          <input
+            id="projectTitle"
+            required
+          >
+        </div>
+
+
+        <div class="form-grid">
+
+          <div class="field">
+
+            <label>Category</label>
+
+            <select id="projectCategory">
+
+              <option>Podcast → Shorts</option>
+              <option>Short Form</option>
+              <option>Social Content</option>
+              <option>Long Form</option>
+              <option>Motion Design</option>
+              <option>Commercial</option>
+              <option>Other</option>
+
+            </select>
+
+          </div>
+
+
+          <div class="field">
+
+            <label>Client</label>
+
+            <input id="projectClient">
+
+          </div>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Description</label>
+
+          <textarea
+            id="projectDescription"
+          ></textarea>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Video URL</label>
+
+          <input
+            id="projectVideo"
+            placeholder="YouTube / Vimeo / hosted video URL"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Thumbnail URL</label>
+
+          <input
+            id="projectThumbnail"
+            placeholder="Image URL"
+          >
+
+        </div>
+
+
+        <div class="form-grid">
+
+          <div class="field">
+
+            <label>Year</label>
+
+            <input
+              id="projectYear"
+              type="number"
+              value="2026"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label>Display order</label>
+
+            <input
+              id="projectOrder"
+              type="number"
+              value="0"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="form-actions">
+
+          <label class="checkbox">
+
+            <input
+              type="checkbox"
+              id="projectFeatured"
+            >
+
+            Featured
+
+          </label>
+
+
+          <label class="checkbox">
+
+            <input
+              type="checkbox"
+              id="projectPublished"
+            >
+
+            Published
+
+          </label>
+
+        </div>
+
+
+        <div class="form-actions">
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            Save project
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-close="projectModal"
+          >
+            Cancel
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- TESTIMONIAL MODAL -->
+
+  <div class="modal" id="testimonialModal">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+
+        <div>
+          <div class="eyebrow">
+            Social proof
+          </div>
+
+          <div class="panel-title">
+            Testimonial
+          </div>
+        </div>
+
+        <button
+          class="close"
+          data-close="testimonialModal"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <form id="testimonialForm">
+
+        <input
+          type="hidden"
+          id="testimonialId"
+        >
+
+
+        <div class="form-grid">
+
+          <div class="field">
+
+            <label>Client name</label>
+
+            <input
+              id="clientName"
+              required
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label>Company</label>
+
+            <input id="clientCompany">
+
+          </div>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Testimonial</label>
+
+          <textarea
+            id="testimonialQuote"
+            required
+          ></textarea>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Client photo URL</label>
+
+          <input id="clientPhoto">
+
+        </div>
+
+
+        <div class="form-grid">
+
+          <div class="field">
+
+            <label>Display order</label>
+
+            <input
+              id="testimonialOrder"
+              type="number"
+              value="0"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label>Published</label>
+
+            <select id="testimonialPublished">
+
+              <option value="false">
+                Draft
+              </option>
+
+              <option value="true">
+                Published
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-actions">
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            Save testimonial
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-close="testimonialModal"
+          >
+            Cancel
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <div id="toast"></div>
+
+
+  <script type="module">
+
+    import { createClient } from
+      "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+
+    const SUPABASE_URL =
+      "https://jogogwzfspqtryadusuj.supabase.co";
+
+    const SUPABASE_ANON_KEY =
+      "sb_publishable_gNyURgRCjKgTrrbawUZNkQ_B7vVB-IU";
+
+
+    const supabase =
+      createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+      );
+
+
+    /* ==========================
+       AUTH
+    ========================== */
+
+    async function requireAdmin() {
+
+      const {
+        data: { session }
+      } = await supabase.auth.getSession();
+
+
+      if (!session) {
+
+        window.location.href = "/admin/";
+
+        return false;
+
+      }
+
+
+      const { data: isAdmin, error } =
+        await supabase.rpc("is_admin");
+
+
+      if (error || !isAdmin) {
+
+        await supabase.auth.signOut();
+
+        window.location.href = "/admin/";
+
+        return false;
+
+      }
+
+
+      return true;
+
+    }
+
+
+    /* ==========================
+       NAVIGATION
+    ========================== */
+
+    function showPage(pageName) {
+
+      document
+        .querySelectorAll(".page")
+        .forEach(page => {
+          page.classList.remove("active");
+        });
+
+
+      const page =
+        document.getElementById(pageName);
+
+      if (page) {
+        page.classList.add("active");
+      }
+
+
+      document
+        .querySelectorAll(".nav-item[data-page]")
+        .forEach(item => {
+
+          item.classList.toggle(
+            "active",
+            item.dataset.page === pageName
+          );
+
+        });
+
+
+      document
+        .getElementById("mobileNav")
+        ?.classList.remove("open");
+
+
+      if (pageName === "projects") {
+        loadProjects();
+      }
+
+      if (pageName === "testimonials") {
+        loadTestimonials();
+      }
+
+      if (pageName === "content") {
+        loadSiteContent();
+      }
+
+    }
+
+
+    document
+      .querySelectorAll(".nav-item[data-page]")
+      .forEach(item => {
+
+        item.addEventListener("click", () => {
+
+          showPage(item.dataset.page);
+
+        });
+
+      });
+
+
+    /* MOBILE MENU */
+
+    document
+      .getElementById("menuButton")
+      ?.addEventListener("click", () => {
+
+        document
+          .getElementById("mobileNav")
+          .classList.toggle("open");
+
+      });
+
+
+    /* ==========================
+       TOAST
+    ========================== */
+
+    function toast(message) {
+
+      const element =
+        document.getElementById("toast");
+
+      element.textContent = message;
+
+      element.classList.add("show");
+
+      setTimeout(() => {
+
+        element.classList.remove("show");
+
+      }, 2500);
+
+    }
+
+
+    /* ==========================
+       PROJECTS
+    ========================== */
+
+    async function loadProjects() {
+
+      const container =
+        document.getElementById("projectList");
+
+      container.textContent =
+        "Loading projects...";
+
+
+      const {
+        data,
+        error
+      } = await supabase
+        .from("projects")
+        .select("*")
+        .order("sort_order", {
+          ascending: true
+        })
+        .order("created_at", {
+          ascending: false
+        });
+
+
+      if (error) {
+
+        container.textContent =
+          error.message;
+
+        return;
+
+      }
+
+
+      document.getElementById("projectCount")
+        .textContent = data.length;
+
+
+      document.getElementById("publishedCount")
+        .textContent =
+          data.filter(p => p.published).length;
+
+
+      if (!data.length) {
+
+        container.innerHTML = `
+          <p style="color:#777;font-size:13px">
+            No projects yet. Add your first showreel.
+          </p>
+        `;
+
+        return;
+
+      }
+
+
+      container.innerHTML =
+        data.map(project => `
+
+          <div class="project-row">
+
+            <div>
+
+              <div class="project-name">
+
+                ${escapeHtml(project.title)}
+
+                <span class="status ${
+                  project.published
+                    ? "live"
+                    : "draft"
+                }">
+
+                  ${
+                    project.published
+                      ? "Published"
+                      : "Draft"
+                  }
+
+                </span>
+
+              </div>
+
+              <div class="project-meta">
+
+                ${
+                  escapeHtml(
+                    project.category || ""
+                  )
+                }
+
+                ${
+                  project.client_name
+                    ? " · " +
+                      escapeHtml(
+                        project.client_name
+                      )
+                    : ""
+                }
+
+              </div>
+
+            </div>
+
+
+            <div class="project-actions">
+
+              <button
+                class="btn btn-secondary"
+                onclick="editProject(${project.id})"
+              >
+                Edit
+              </button>
+
+              <button
+                class="btn btn-danger"
+                onclick="deleteProject(${project.id})"
+              >
+                Delete
+              </button>
+
+            </div>
+
+          </div>
+
+        `).join("");
+
+    }
+
+
+    function openProjectModal(project = null) {
+
+      document
+        .getElementById("projectModal")
+        .classList.add("open");
+
+
+      document.getElementById("projectId").value =
+        project?.id || "";
+
+
+      document.getElementById("projectTitle").value =
+        project?.title || "";
+
+
+      document.getElementById("projectCategory").value =
+        project?.category || "Short Form";
+
+
+      document.getElementById("projectClient").value =
+        project?.client_name || "";
+
+
+      document.getElementById("projectDescription").value =
+        project?.description || "";
+
+
+      document.getElementById("projectVideo").value =
+        project?.video_url || "";
+
+
+      document.getElementById("projectThumbnail").value =
+        project?.thumbnail_url || "";
+
+
+      document.getElementById("projectYear").value =
+        project?.year || 2026;
+
+
+      document.getElementById("projectOrder").value =
+        project?.sort_order || 0;
+
+
+      document.getElementById("projectFeatured").checked =
+        !!project?.featured;
+
+
+      document.getElementById("projectPublished").checked =
+        !!project?.published;
+
+    }
+
+
+    async function editProject(id) {
+
+      const {
+        data,
+        error
+      } = await supabase
+        .from("projects")
+        .select("*")
+        .eq("id", id)
+        .single();
+
+
+      if (error) {
+
+        toast(error.message);
+
+        return;
+
+      }
+
+
+      openProjectModal(data);
+
+    }
+
+
+    async function deleteProject(id) {
+
+      if (!confirm(
+        "Delete this project permanently?"
+      )) return;
+
+
+      const {
+        error
+      } = await supabase
+        .from("projects")
+        .delete()
+        .eq("id", id);
+
+
+      if (error) {
+
+        toast(error.message);
+
+        return;
+
+      }
+
+
+      toast("Project deleted.");
+
+      loadProjects();
+
+    }
+
+
+    window.editProject = editProject;
+    window.deleteProject = deleteProject;
+
+
+    document
+      .getElementById("projectForm")
+      .addEventListener("submit", async event => {
+
+        event.preventDefault();
+
+
+        const id =
+          document.getElementById("projectId").value;
+
+
+        const project = {
+
+          title:
+            document.getElementById(
+              "projectTitle"
+            ).value.trim(),
+
+          category:
+            document.getElementById(
+              "projectCategory"
+            ).value,
+
+          client_name:
+            document.getElementById(
+              "projectClient"
+            ).value.trim(),
+
+          description:
+            document.getElementById(
+              "projectDescription"
+            ).value.trim(),
+
+          video_url:
+            document.getElementById(
+              "projectVideo"
+            ).value.trim(),
+
+          thumbnail_url:
+            document.getElementById(
+              "projectThumbnail"
+            ).value.trim(),
+
+          year:
+            Number(
+              document.getElementById(
+                "projectYear"
+              ).value
+            ),
+
+          sort_order:
+            Number(
+              document.getElementById(
+                "projectOrder"
+              ).value
+            ),
+
+          featured:
+            document.getElementById(
+              "projectFeatured"
+            ).checked,
+
+          published:
+            document.getElementById(
+              "projectPublished"
+            ).checked
+
+        };
+
+
+        let result;
+
+
+        if (id) {
+
+          result = await supabase
+            .from("projects")
+            .update(project)
+            .eq("id", id);
+
+        } else {
+
+          result = await supabase
+            .from("projects")
+            .insert(project);
+
+        }
+
+
+        if (result.error) {
+
+          toast(result.error.message);
+
+          return;
+
+        }
+
+
+        closeModal("projectModal");
+
+        toast("Project saved.");
+
+        loadProjects();
+
+      });
+
+
+    /* ==========================
+       TESTIMONIALS
+    ========================== */
+
+    async function loadTestimonials() {
+
+      const container =
+        document.getElementById(
+          "testimonialList"
+        );
+
+
+      container.textContent =
+        "Loading testimonials...";
+
+
+      const {
+        data,
+        error
+      } = await supabase
+        .from("testimonials")
+        .select("*")
+        .order("sort_order", {
+          ascending: true
+        });
+
+
+      if (error) {
+
+        container.textContent =
+          error.message;
+
+        return;
+
+      }
+
+
+      document.getElementById(
+        "testimonialCount"
+      ).textContent = data.length;
+
+
+      if (!data.length) {
+
+        container.innerHTML = `
+          <p style="color:#777;font-size:13px">
+            No testimonials yet.
+          </p>
+        `;
+
+        return;
+
+      }
+
+
+      container.innerHTML =
+        data.map(item => `
+
+          <div class="project-row">
+
+            <div>
+
+              <div class="project-name">
+
+                ${escapeHtml(
+                  item.client_name
+                )}
+
+                <span class="status ${
+                  item.published
+                    ? "live"
+                    : "draft"
+                }">
+
+                  ${
+                    item.published
+                      ? "Published"
+                      : "Draft"
+                  }
+
+                </span>
+
+              </div>
+
+              <div class="project-meta">
+
+                ${
+                  escapeHtml(
+                    item.company || ""
+                  )
+                }
+
+              </div>
+
+            </div>
+
+
+            <div class="project-actions">
+
+              <button
+                class="btn btn-secondary"
+                onclick="editTestimonial(${item.id})"
+              >
+                Edit
+              </button>
+
+              <button
+                class="btn btn-danger"
+                onclick="deleteTestimonial(${item.id})"
+              >
+                Delete
+              </button>
+
+            </div>
+
+          </div>
+
+        `).join("");
+
+    }
+
+
+    function openTestimonialModal(item = null) {
+
+      document
+        .getElementById("testimonialModal")
+        .classList.add("open");
+
+
+      document.getElementById(
+        "testimonialId"
+      ).value = item?.id || "";
+
+
+      document.getElementById(
+        "clientName"
+      ).value = item?.client_name || "";
+
+
+      document.getElementById(
+        "clientCompany"
+      ).value = item?.company || "";
+
+
+      document.getElementById(
+        "testimonialQuote"
+      ).value = item?.quote || "";
+
+
+      document.getElementById(
+        "clientPhoto"
+      ).value =
+        item?.client_photo_url || "";
+
+
+      document.getElementById(
+        "testimonialOrder"
+      ).value =
+        item?.sort_order || 0;
+
+
+      document.getElementById(
+        "testimonialPublished"
+      ).value =
+        String(!!item?.published);
+
+    }
+
+
+    async function editTestimonial(id) {
+
+      const {
+        data,
+        error
+      } = await supabase
+        .from("testimonials")
+        .select("*")
+        .eq("id", id)
+        .single();
+
+
+      if (error) {
+
+        toast(error.message);
+
+        return;
+
+      }
+
+
+      openTestimonialModal(data);
+
+    }
+
+
+    async function deleteTestimonial(id) {
+
+      if (!confirm(
+        "Delete this testimonial permanently?"
+      )) return;
+
+
+      const {
+        error
+      } = await supabase
+        .from("testimonials")
+        .delete()
+        .eq("id", id);
+
+
+      if (error) {
+
+        toast(error.message);
+
+        return;
+
+      }
+
+
+      toast("Testimonial deleted.");
+
+      loadTestimonials();
+
+    }
+
+
+    window.editTestimonial =
+      editTestimonial;
+
+    window.deleteTestimonial =
+      deleteTestimonial;
+
+
+    document
+      .getElementById("testimonialForm")
+      .addEventListener("submit", async event => {
+
+        event.preventDefault();
+
+
+        const id =
+          document.getElementById(
+            "testimonialId"
+          ).value;
+
+
+        const item = {
+
+          client_name:
+            document.getElementById(
+              "clientName"
+            ).value.trim(),
+
+          company:
+            document.getElementById(
+              "clientCompany"
+            ).value.trim(),
+
+          quote:
+            document.getElementById(
+              "testimonialQuote"
+            ).value.trim(),
+
+          client_photo_url:
+            document.getElementById(
+              "clientPhoto"
+            ).value.trim(),
+
+          sort_order:
+            Number(
+              document.getElementById(
+                "testimonialOrder"
+              ).value
+            ),
+
+          published:
+            document.getElementById(
+              "testimonialPublished"
+            ).value === "true"
+
+        };
+
+
+        let result;
+
+
+        if (id) {
+
+          result = await supabase
+            .from("testimonials")
+            .update(item)
+            .eq("id", id);
+
+        } else {
+
+          result = await supabase
+            .from("testimonials")
+            .insert(item);
+
+        }
+
+
+        if (result.error) {
+
+          toast(result.error.message);
+
+          return;
+
+        }
+
+
+        closeModal("testimonialModal");
+
+        toast("Testimonial saved.");
+
+        loadTestimonials();
+
+      });
+
+
+    /* ==========================
+       SITE CONTENT
+    ========================== */
+
+    async function loadSiteContent() {
+
+      const {
+        data,
+        error
+      } = await supabase
+        .from("site_content")
+        .select("*")
+        .limit(1)
+        .maybeSingle();
+
+
+      if (error) {
+
+        toast(error.message);
+
+        return;
+
+      }
+
+
+      if (!data) return;
+
+
+      document.getElementById(
+        "heroTitle"
+      ).value =
+        data.hero_title || "";
+
+
+      document.getElementById(
+        "heroDescription"
+      ).value =
+        data.hero_description || "";
+
+
+      document.getElementById(
+        "aboutTitle"
+      ).value =
+        data.about_title || "";
+
+
+      document.getElementById(
+        "aboutText"
+      ).value =
+        data.about_text || "";
+
+
+      document.getElementById(
+        "contactEmail"
+      ).value =
+        data.contact_email || "";
+
+
+      document.getElementById(
+        "whatsappNumber"
+      ).value =
+        data.whatsapp_number || "";
+
+
+      document.getElementById(
+        "instagramUrl"
+      ).value =
+        data.instagram_url || "";
+
+
+      document.getElementById(
+        "twitterUrl"
+      ).value =
+        data.twitter_url || "";
+
+
+      document.getElementById(
+        "linkedinUrl"
+      ).value =
+        data.linkedin_url || "";
+
+
+      document.getElementById(
+        "youtubeUrl"
+      ).value =
+        data.youtube_url || "";
+
+    }
+
+
+    document
+      .getElementById("contentForm")
+      .addEventListener("submit", async event => {
+
+        event.preventDefault();
+
+
+        const {
+          data: existing
+        } = await supabase
+          .from("site_content")
+          .select("id")
+          .limit(1)
+          .maybeSingle();
+
+
+        const content = {
+
+          hero_title:
+            document.getElementById(
+              "heroTitle"
+            ).value.trim(),
+
+          hero_description:
+            document.getElementById(
+              "heroDescription"
+            ).value.trim(),
+
+          about_title:
+            document.getElementById(
+              "aboutTitle"
+            ).value.trim(),
+
+          about_text:
+            document.getElementById(
+              "aboutText"
+            ).value.trim(),
+
+          contact_email:
+            document.getElementById(
+              "contactEmail"
+            ).value.trim(),
+
+          whatsapp_number:
+            document.getElementById(
+              "whatsappNumber"
+            ).value.trim(),
+
+          instagram_url:
+            document.getElementById(
+              "instagramUrl"
+            ).value.trim(),
+
+          twitter_url:
+            document.getElementById(
+              "twitterUrl"
+            ).value.trim(),
+
+          linkedin_url:
+            document.getElementById(
+              "linkedinUrl"
+            ).value.trim(),
+
+          youtube_url:
+            document.getElementById(
+              "youtubeUrl"
+            ).value.trim(),
+
+          updated_at:
+            new Date().toISOString()
+
+        };
+
+
+        let result;
+
+
+        if (existing) {
+
+          result = await supabase
+            .from("site_content")
+            .update(content)
+            .eq("id", existing.id);
+
+        } else {
+
+          result = await supabase
+            .from("site_content")
+            .insert(content);
+
+        }
+
+
+        if (result.error) {
+
+          toast(result.error.message);
+
+          return;
+
+        }
+
+
+        toast("Site content saved.");
+
+      });
+
+
+    /* ==========================
+       MODALS
+    ========================== */
+
+    function closeModal(id) {
+
+      document
+        .getElementById(id)
+        .classList.remove("open");
+
+    }
+
+
+    document
+      .querySelectorAll("[data-close]")
+      .forEach(button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+            closeModal(
+              button.dataset.close
+            );
+          }
+        );
+
+      });
+
+
+    document
+      .getElementById("addProjectTop")
+      .addEventListener(
+        "click",
+        () => openProjectModal()
+      );
+
+
+    document
+      .getElementById("newProjectButton")
+      .addEventListener(
+        "click",
+        () => {
+
+          showPage("projects");
+
+          openProjectModal();
+
+        }
+      );
+
+
+    document
+      .getElementById("addTestimonialTop")
+      .addEventListener(
+        "click",
+        () => openTestimonialModal()
+      );
+
+
+    document
+      .getElementById("newTestimonialButton")
+      .addEventListener(
+        "click",
+        () => {
+
+          showPage("testimonials");
+
+          openTestimonialModal();
+
+        }
+      );
+
+
+    /* ==========================
+       LOGOUT
+    ========================== */
+
+    async function logout() {
+
+      await supabase.auth.signOut();
+
+      window.location.href = "/admin/";
+
+    }
+
+
+    document
+      .getElementById("logout")
+      .addEventListener("click", logout);
+
+
+    document
+      .getElementById("mobileLogout")
+      .addEventListener("click", logout);
+
+
+    /* ==========================
+       SECURITY / HTML ESCAPE
+    ========================== */
+
+    function escapeHtml(value) {
+
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+    }
+
+
+    /* ==========================
+       START
+    ========================== */
+
+    const authorized =
+      await requireAdmin();
+
+
+    if (authorized) {
+
+      await loadProjects();
+
+      await loadTestimonials();
+
+    }
+
+  </script>
+
+</body>
+</html>
