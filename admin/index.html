@@ -2,185 +2,922 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Login</title>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Tansi Cyril — Video Editor</title>
+
+  <meta
+    name="description"
+    content="Video editor specializing in podcast-to-shorts, short-form content, commercials and cinematic storytelling."
+  >
 
   <style>
+
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      margin: 0;
-      min-height: 100vh;
-      background: #070707;
-      color: white;
-      font-family: Arial, sans-serif;
+      background: #050505;
+      color: #f5f5f5;
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* =========================
+       NAV
+    ========================= */
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+
       display: flex;
+      justify-content: space-between;
       align-items: center;
+
+      padding: 22px 5vw;
+
+      backdrop-filter: blur(15px);
+      background: rgba(5,5,5,.55);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    .logo {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: .12em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      font-size: 13px;
+      color: #aaa;
+    }
+
+    .nav-links a {
+      transition: .3s;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 100vh;
+
+      display: flex;
+      flex-direction: column;
       justify-content: center;
+
+      padding: 130px 7vw 80px;
+
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+
+      position: absolute;
+
+      width: 700px;
+      height: 700px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(255,255,255,.09),
+          transparent 65%
+        );
+
+      filter: blur(40px);
+
+      top: 10%;
+      right: -20%;
+
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      color: #888;
+      font-size: 12px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+
+      margin-bottom: 25px;
+    }
+
+    .hero h1 {
+      font-size: clamp(55px, 10vw, 150px);
+      line-height: .88;
+      letter-spacing: -.07em;
+      max-width: 1100px;
+    }
+
+    .hero h1 span {
+      color: #777;
+    }
+
+    .hero-description {
+      max-width: 520px;
+
+      margin-top: 35px;
+
+      color: #999;
+
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 15px;
+
+      margin-top: 35px;
+    }
+
+    .button {
+      display: inline-flex;
+
+      padding: 14px 22px;
+
+      border-radius: 100px;
+
+      border: 1px solid #333;
+
+      font-size: 13px;
+
+      transition: .3s;
+    }
+
+    .button.primary {
+      background: white;
+      color: black;
+      border-color: white;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+    }
+
+    /* =========================
+       SECTIONS
+    ========================= */
+
+    section {
+      padding: 120px 7vw;
+    }
+
+    .section-label {
+      color: #666;
+
+      font-size: 11px;
+
+      letter-spacing: .18em;
+
+      text-transform: uppercase;
+
+      margin-bottom: 30px;
+    }
+
+    .section-heading {
+      font-size: clamp(38px, 6vw, 85px);
+
+      line-height: .95;
+
+      letter-spacing: -.05em;
+
+      max-width: 850px;
+    }
+
+    /* =========================
+       SHOWREEL
+    ========================= */
+
+    .showreel {
+      padding-top: 40px;
+    }
+
+    .showreel-frame {
+      margin-top: 50px;
+
+      width: 100%;
+
+      aspect-ratio: 16 / 9;
+
+      background: #111;
+
+      border-radius: 18px;
+
+      overflow: hidden;
+
+      border: 1px solid #222;
+
+      position: relative;
+    }
+
+    .showreel-frame video {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+    }
+
+    /* =========================
+       PROJECTS
+    ========================= */
+
+    .projects-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+      gap: 25px;
+
+      margin-top: 60px;
+    }
+
+    .project {
+      position: relative;
+
+      overflow: hidden;
+
+      border-radius: 16px;
+
+      background: #111;
+
+      border: 1px solid #222;
+    }
+
+    .project-media {
+      aspect-ratio: 16 / 10;
+
+      overflow: hidden;
+    }
+
+    .project-media img,
+    .project-media video {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      transition: transform .8s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .project:hover img,
+    .project:hover video {
+      transform: scale(1.05);
+    }
+
+    .project-info {
       padding: 20px;
     }
 
-    .box {
-      width: 100%;
-      max-width: 420px;
-      background: #111;
+    .project-category {
+      color: #777;
+
+      font-size: 11px;
+
+      text-transform: uppercase;
+
+      letter-spacing: .12em;
+    }
+
+    .project-title {
+      margin-top: 8px;
+
+      font-size: 20px;
+    }
+
+    .project-client {
+      margin-top: 8px;
+
+      color: #777;
+
+      font-size: 13px;
+    }
+
+    /* =========================
+       SERVICES
+    ========================= */
+
+    .services {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      margin-top: 60px;
+
+      border-top: 1px solid #222;
+    }
+
+    .service {
+      padding: 35px 0;
+
+      border-bottom: 1px solid #222;
+
+      font-size: clamp(22px, 3vw, 40px);
+
+      letter-spacing: -.03em;
+    }
+
+    /* =========================
+       ABOUT
+    ========================= */
+
+    .about-grid {
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 80px;
+
+      margin-top: 60px;
+    }
+
+    .about-text {
+      color: #999;
+
+      font-size: 18px;
+
+      line-height: 1.8;
+    }
+
+    /* =========================
+       TESTIMONIALS
+    ========================= */
+
+    .testimonial-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 25px;
+
+      margin-top: 60px;
+    }
+
+    .testimonial {
+      padding: 35px;
+
       border: 1px solid #222;
-      border-radius: 18px;
-      padding: 30px;
+
+      border-radius: 16px;
+
+      background: #0c0c0c;
     }
 
-    h1 {
-      margin-top: 0;
-    }
+    .testimonial p {
+      color: #ccc;
 
-    input {
-      width: 100%;
-      padding: 15px;
-      margin-top: 10px;
-      margin-bottom: 15px;
-      background: #080808;
-      color: white;
-      border: 1px solid #333;
-      border-radius: 10px;
+      line-height: 1.7;
+
       font-size: 16px;
     }
 
-    button {
-      width: 100%;
-      padding: 15px;
-      border: 0;
-      border-radius: 10px;
-      background: white;
-      color: black;
-      font-size: 16px;
-      font-weight: bold;
+    .testimonial-name {
+      margin-top: 25px;
+
+      font-weight: 600;
     }
 
-    #status {
-      margin-top: 20px;
-      color: #aaa;
-      line-height: 1.5;
-      word-break: break-word;
+    .testimonial-role {
+      color: #666;
+
+      margin-top: 5px;
+
+      font-size: 12px;
     }
+
+    /* =========================
+       CONTACT
+    ========================= */
+
+    .contact {
+      text-align: center;
+
+      padding-top: 160px;
+      padding-bottom: 160px;
+    }
+
+    .contact h2 {
+      font-size: clamp(50px, 9vw, 130px);
+
+      line-height: .9;
+
+      letter-spacing: -.07em;
+    }
+
+    .contact p {
+      color: #777;
+
+      margin: 30px auto;
+
+      max-width: 500px;
+
+      line-height: 1.7;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      padding: 30px 7vw;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      color: #555;
+
+      font-size: 12px;
+
+      border-top: 1px solid #1a1a1a;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 700px) {
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        min-height: 90vh;
+
+        padding-left: 6vw;
+        padding-right: 6vw;
+      }
+
+      section {
+        padding-left: 6vw;
+        padding-right: 6vw;
+      }
+
+      .projects-grid,
+      .testimonial-grid,
+      .about-grid,
+      .services {
+        grid-template-columns: 1fr;
+      }
+
+      .about-grid {
+        gap: 30px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+
+        align-items: flex-start;
+      }
+
+      footer {
+        flex-direction: column;
+
+        gap: 10px;
+      }
+
+    }
+
   </style>
 </head>
 
 <body>
 
-<div class="box">
-  <h1>Admin Login</h1>
+<nav>
 
-  <input
-    id="email"
-    type="email"
-    placeholder="Email"
-  >
+  <a href="#" class="logo">
+    TC.
+  </a>
 
-  <input
-    id="password"
-    type="password"
-    placeholder="Password"
-  >
+  <div class="nav-links">
 
-  <button onclick="login()">
-    Login
-  </button>
+    <a href="#work">Work</a>
 
-  <div id="status">
-    Ready.
+    <a href="#about">About</a>
+
+    <a href="#testimonials">
+      Testimonials
+    </a>
+
+    <a href="#contact">
+      Contact
+    </a>
+
   </div>
-</div>
+
+</nav>
+
+
+<main>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="eyebrow">
+      Video Editor / Visual Storyteller
+    </div>
+
+    <h1>
+      I turn raw footage
+      <span>into attention.</span>
+    </h1>
+
+    <p class="hero-description">
+      Podcast-to-shorts editing, short-form content,
+      commercials and visual storytelling built to
+      make people stop, watch and remember.
+    </p>
+
+    <div class="hero-actions">
+
+      <a
+        href="#work"
+        class="button primary"
+      >
+        Explore my work
+      </a>
+
+      <a
+        href="#contact"
+        class="button"
+      >
+        Let's work
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- SHOWREEL -->
+
+  <section
+    class="showreel"
+    id="work"
+  >
+
+    <div class="section-label">
+      01 / Showreel
+    </div>
+
+    <h2 class="section-heading">
+      A few seconds
+      can change everything.
+    </h2>
+
+    <div class="showreel-frame">
+
+      <video
+        id="showreelVideo"
+        controls
+        playsinline
+        preload="metadata"
+      ></video>
+
+    </div>
+
+  </section>
+
+
+  <!-- PROJECTS -->
+
+  <section>
+
+    <div class="section-label">
+      02 / Selected Work
+    </div>
+
+    <h2 class="section-heading">
+      Work that speaks
+      before I do.
+    </h2>
+
+    <div
+      id="projectsGrid"
+      class="projects-grid"
+    ></div>
+
+  </section>
+
+
+  <!-- SERVICES -->
+
+  <section>
+
+    <div class="section-label">
+      03 / What I Do
+    </div>
+
+    <h2 class="section-heading">
+      Built for attention.
+    </h2>
+
+    <div class="services">
+
+      <div class="service">
+        Podcast → Shorts
+      </div>
+
+      <div class="service">
+        Short-form Editing
+      </div>
+
+      <div class="service">
+        Commercial / Ad Editing
+      </div>
+
+      <div class="service">
+        Motion & Visual Storytelling
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ABOUT -->
+
+  <section id="about">
+
+    <div class="section-label">
+      04 / About
+    </div>
+
+    <h2 class="section-heading">
+      More than
+      just cutting clips.
+    </h2>
+
+    <div class="about-grid">
+
+      <div></div>
+
+      <div class="about-text">
+
+        I'm Tansi Cyril, a video editor focused on
+        turning ideas and raw footage into content
+        people actually want to watch.
+
+        <br><br>
+
+        My strongest work lives around podcast
+        content, short-form storytelling and
+        attention-driven edits — but I'm not limited
+        to one format.
+
+        <br><br>
+
+        Every cut, transition, sound and visual
+        decision has one purpose:
+
+        <br>
+
+        <strong>
+          make the story hit harder.
+        </strong>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- TESTIMONIALS -->
+
+  <section id="testimonials">
+
+    <div class="section-label">
+      05 / Testimonials
+    </div>
+
+    <h2 class="section-heading">
+      Don't take my
+      word for it.
+    </h2>
+
+    <div
+      id="testimonialsGrid"
+      class="testimonial-grid"
+    ></div>
+
+  </section>
+
+
+  <!-- CONTACT -->
+
+  <section
+    class="contact"
+    id="contact"
+  >
+
+    <div class="section-label">
+      06 / Contact
+    </div>
+
+    <h2>
+      Let's make
+      something move.
+    </h2>
+
+    <p>
+      Have a podcast, brand, campaign or idea
+      that needs stronger visual storytelling?
+      Let's talk.
+    </p>
+
+    <a
+      href="mailto:hello@example.com"
+      class="button primary"
+    >
+      Start a conversation
+    </a>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  <span>
+    © 2026 Tansi Cyril
+  </span>
+
+  <span>
+    Video Editor
+  </span>
+
+</footer>
+
 
 <script type="module">
 
-import { createClient } from
+import {
+  createClient
+} from
 "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
-const SUPABASE_URL = "https://jogogwzfspqtryadusuj.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_gNyURgRCjKgTrrbawUZNkQ_B7vVB-IU";
 
-const supabase = createClient(
+const SUPABASE_URL =
+"YOUR_SUPABASE_URL";
+
+const SUPABASE_ANON_KEY =
+"YOUR_SUPABASE_ANON_KEY";
+
+
+const supabase =
+createClient(
   SUPABASE_URL,
   SUPABASE_ANON_KEY
 );
 
-window.login = async function () {
 
-  const status = document.getElementById("status");
+/* =========================
+   LOAD PROJECTS
+========================= */
 
-  status.textContent = "Connecting to Supabase...";
+async function loadProjects() {
 
-  try {
+  const {
+    data,
+    error
+  } = await supabase
 
-    const email =
-      document.getElementById("email").value.trim();
+    .from("projects")
 
-    const password =
-      document.getElementById("password").value;
+    .select("*")
 
-    if (!email || !password) {
-      status.textContent = "Enter your email and password.";
-      return;
-    }
+    .eq("published", true)
 
-    status.textContent = "Signing in...";
+    .order(
+      "display_order",
+      {
+        ascending: true
+      }
+    );
 
-    const { data, error } =
-      await supabase.auth.signInWithPassword({
-        email,
-        password
-      });
 
-    if (error) {
-      status.textContent =
-        "LOGIN ERROR: " + error.message;
-      return;
-    }
+  if (error) {
 
-    if (!data.session) {
-      status.textContent =
-        "Login succeeded, but no session was created.";
-      return;
-    }
+    console.error(
+      "Projects:",
+      error
+    );
 
-    status.textContent =
-      "Login successful. Checking admin access...";
+    return;
 
-    const { data: isAdmin, error: adminError } =
-      await supabase.rpc("is_admin");
-
-    if (adminError) {
-      status.textContent =
-        "ADMIN RPC ERROR: " + adminError.message;
-      return;
-    }
-
-    if (!isAdmin) {
-
-  status.textContent =
-    "AUTHENTICATED BUT NOT ADMIN. User ID: " +
-    data.user.id;
-
-  return;
-}
-
-    status.textContent =
-      "Admin verified. Opening dashboard...";
-
-    window.location.href =
-      "/admin/dashboard.html";
-
-  } catch (err) {
-
-    status.textContent =
-      "JAVASCRIPT ERROR: " + err.message;
-
-    console.error(err);
   }
 
-};
+
+  const grid =
+    document.getElementById(
+      "projectsGrid"
+    );
+
+
+  grid.innerHTML =
+    data.map(project => `
+
+      <article class="project">
+
+        <div class="project-media">
+
+          ${
+            project.video_url
+
+            ?
+
+            `
+              <video
+                src="${project.video_url}"
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                onmouseenter="this.play()"
+                onmouseleave="this.pause()"
+              ></video>
+            `
+
+            :
+
+            `
+              <img
+                src="${project.thumbnail_url || ''}"
+                alt="${project.title || ''}"
+                loading="lazy"
+              >
+            `
+          }
+
+        </div>
+
+        <div class="project-info">
+
+          <div class="project-category">
+            ${project.category || ""}
+          </div>
+
+          <div class="project-title">
+            ${project.title || ""}
+          </div>
+
+          <div class="project-client">
+            ${project.client || ""}
+          </div>
+
+        </div>
+
+      </article>
+
+    `).join("");
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+loadProjects();
 
 </script>
 
