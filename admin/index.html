@@ -8,918 +8,749 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Tansi Cyril — Video Editor</title>
+  <title>Admin Login — Tansi Cyril</title>
 
   <meta
-    name="description"
-    content="Video editor specializing in podcast-to-shorts, short-form content, commercials and cinematic storytelling."
+    name="robots"
+    content="noindex, nofollow"
   >
 
   <style>
-
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
+    :root {
+      --bg: #080808;
+      --panel: #111111;
+      --panel-2: #151515;
+      --border: rgba(255,255,255,.10);
+      --text: #f5f5f5;
+      --muted: #8d8d8d;
+      --accent: #ffffff;
+      --danger: #ff6b6b;
+      --success: #70e1a1;
     }
 
     body {
-      background: #050505;
-      color: #f5f5f5;
-      font-family: Arial, Helvetica, sans-serif;
-      overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* =========================
-       NAV
-    ========================= */
-
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      padding: 22px 5vw;
-
-      backdrop-filter: blur(15px);
-      background: rgba(5,5,5,.55);
-      border-bottom: 1px solid rgba(255,255,255,.06);
-    }
-
-    .logo {
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: .12em;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 25px;
-      font-size: 13px;
-      color: #aaa;
-    }
-
-    .nav-links a {
-      transition: .3s;
-    }
-
-    .nav-links a:hover {
-      color: white;
-    }
-
-    /* =========================
-       HERO
-    ========================= */
-
-    .hero {
       min-height: 100vh;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-
-      padding: 130px 7vw 80px;
-
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-
-      position: absolute;
-
-      width: 700px;
-      height: 700px;
-
-      border-radius: 50%;
-
       background:
         radial-gradient(
-          circle,
-          rgba(255,255,255,.09),
-          transparent 65%
-        );
+          circle at 50% 0%,
+          rgba(255,255,255,.07),
+          transparent 35%
+        ),
+        var(--bg);
+      color: var(--text);
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
 
-      filter: blur(40px);
+    .login-wrapper {
+      width: 100%;
+      max-width: 430px;
+    }
 
-      top: 10%;
-      right: -20%;
+    .brand {
+      text-align: center;
+      margin-bottom: 28px;
+    }
 
-      pointer-events: none;
+    .brand-mark {
+      width: 54px;
+      height: 54px;
+      margin: 0 auto 16px;
+      border: 1px solid var(--border);
+      background: #101010;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .brand-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .brand-subtitle {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 7px;
+    }
+
+    .login-card {
+      background: rgba(17,17,17,.92);
+      border: 1px solid var(--border);
+      padding: 32px;
+      box-shadow:
+        0 30px 80px rgba(0,0,0,.35);
+      backdrop-filter: blur(12px);
     }
 
     .eyebrow {
-      color: #888;
-      font-size: 12px;
+      color: #999;
+      font-size: 10px;
+      font-weight: 700;
       letter-spacing: .18em;
       text-transform: uppercase;
-
-      margin-bottom: 25px;
+      margin-bottom: 10px;
     }
 
-    .hero h1 {
-      font-size: clamp(55px, 10vw, 150px);
-      line-height: .88;
-      letter-spacing: -.07em;
-      max-width: 1100px;
+    h1 {
+      font-size: 27px;
+      line-height: 1.1;
+      letter-spacing: -.04em;
+      margin-bottom: 8px;
     }
 
-    .hero h1 span {
-      color: #777;
-    }
-
-    .hero-description {
-      max-width: 520px;
-
-      margin-top: 35px;
-
-      color: #999;
-
-      font-size: 16px;
-      line-height: 1.7;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 15px;
-
-      margin-top: 35px;
-    }
-
-    .button {
-      display: inline-flex;
-
-      padding: 14px 22px;
-
-      border-radius: 100px;
-
-      border: 1px solid #333;
-
+    .description {
+      color: var(--muted);
       font-size: 13px;
-
-      transition: .3s;
+      line-height: 1.6;
+      margin-bottom: 28px;
     }
 
-    .button.primary {
+    .field {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      color: #d9d9d9;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    input {
+      width: 100%;
+      height: 48px;
+      padding: 0 14px;
+      border: 1px solid var(--border);
+      outline: none;
+      background: #0c0c0c;
+      color: white;
+      font: inherit;
+      font-size: 14px;
+      transition:
+        border-color .2s,
+        background .2s;
+    }
+
+    input.password-input {
+      padding-right: 76px;
+    }
+
+    input:focus {
+      border-color: rgba(255,255,255,.35);
+      background: #101010;
+    }
+
+    input::placeholder {
+      color: #555;
+    }
+
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      border: 0;
+      background: transparent;
+      color: #888;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      padding: 5px;
+    }
+
+    .toggle-password:hover {
+      color: white;
+    }
+
+    .login-button {
+      width: 100%;
+      height: 50px;
+      margin-top: 6px;
+      border: 0;
       background: white;
       color: black;
-      border-color: white;
-    }
-
-    .button:hover {
-      transform: translateY(-3px);
-    }
-
-    /* =========================
-       SECTIONS
-    ========================= */
-
-    section {
-      padding: 120px 7vw;
-    }
-
-    .section-label {
-      color: #666;
-
-      font-size: 11px;
-
-      letter-spacing: .18em;
-
-      text-transform: uppercase;
-
-      margin-bottom: 30px;
-    }
-
-    .section-heading {
-      font-size: clamp(38px, 6vw, 85px);
-
-      line-height: .95;
-
-      letter-spacing: -.05em;
-
-      max-width: 850px;
-    }
-
-    /* =========================
-       SHOWREEL
-    ========================= */
-
-    .showreel {
-      padding-top: 40px;
-    }
-
-    .showreel-frame {
-      margin-top: 50px;
-
-      width: 100%;
-
-      aspect-ratio: 16 / 9;
-
-      background: #111;
-
-      border-radius: 18px;
-
-      overflow: hidden;
-
-      border: 1px solid #222;
-
-      position: relative;
-    }
-
-    .showreel-frame video {
-      width: 100%;
-      height: 100%;
-
-      object-fit: cover;
-    }
-
-    /* =========================
-       PROJECTS
-    ========================= */
-
-    .projects-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-      gap: 25px;
-
-      margin-top: 60px;
-    }
-
-    .project {
-      position: relative;
-
-      overflow: hidden;
-
-      border-radius: 16px;
-
-      background: #111;
-
-      border: 1px solid #222;
-    }
-
-    .project-media {
-      aspect-ratio: 16 / 10;
-
-      overflow: hidden;
-    }
-
-    .project-media img,
-    .project-media video {
-      width: 100%;
-      height: 100%;
-
-      object-fit: cover;
-
-      transition: transform .8s cubic-bezier(.2,.7,.2,1);
-    }
-
-    .project:hover img,
-    .project:hover video {
-      transform: scale(1.05);
-    }
-
-    .project-info {
-      padding: 20px;
-    }
-
-    .project-category {
-      color: #777;
-
-      font-size: 11px;
-
-      text-transform: uppercase;
-
-      letter-spacing: .12em;
-    }
-
-    .project-title {
-      margin-top: 8px;
-
-      font-size: 20px;
-    }
-
-    .project-client {
-      margin-top: 8px;
-
-      color: #777;
-
+      cursor: pointer;
+      font: inherit;
       font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      transition:
+        opacity .2s,
+        transform .2s;
     }
 
-    /* =========================
-       SERVICES
-    ========================= */
-
-    .services {
-      display: grid;
-
-      grid-template-columns:
-        repeat(2, 1fr);
-
-      margin-top: 60px;
-
-      border-top: 1px solid #222;
+    .login-button:hover {
+      opacity: .9;
     }
 
-    .service {
-      padding: 35px 0;
-
-      border-bottom: 1px solid #222;
-
-      font-size: clamp(22px, 3vw, 40px);
-
-      letter-spacing: -.03em;
+    .login-button:active {
+      transform: scale(.99);
     }
 
-    /* =========================
-       ABOUT
-    ========================= */
-
-    .about-grid {
-      display: grid;
-
-      grid-template-columns:
-        1fr 1fr;
-
-      gap: 80px;
-
-      margin-top: 60px;
+    .login-button:disabled {
+      opacity: .5;
+      cursor: not-allowed;
     }
 
-    .about-text {
-      color: #999;
-
-      font-size: 18px;
-
-      line-height: 1.8;
-    }
-
-    /* =========================
-       TESTIMONIALS
-    ========================= */
-
-    .testimonial-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(2, 1fr);
-
-      gap: 25px;
-
-      margin-top: 60px;
-    }
-
-    .testimonial {
-      padding: 35px;
-
-      border: 1px solid #222;
-
-      border-radius: 16px;
-
-      background: #0c0c0c;
-    }
-
-    .testimonial p {
-      color: #ccc;
-
-      line-height: 1.7;
-
-      font-size: 16px;
-    }
-
-    .testimonial-name {
-      margin-top: 25px;
-
-      font-weight: 600;
-    }
-
-    .testimonial-role {
-      color: #666;
-
-      margin-top: 5px;
-
+    .message {
+      display: none;
+      margin-top: 16px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: #0d0d0d;
       font-size: 12px;
+      line-height: 1.5;
     }
 
-    /* =========================
-       CONTACT
-    ========================= */
+    .message.show {
+      display: block;
+    }
 
-    .contact {
+    .message.error {
+      color: var(--danger);
+      border-color: rgba(255,107,107,.18);
+    }
+
+    .message.success {
+      color: var(--success);
+      border-color: rgba(112,225,161,.18);
+    }
+
+    .footer {
       text-align: center;
-
-      padding-top: 160px;
-      padding-bottom: 160px;
-    }
-
-    .contact h2 {
-      font-size: clamp(50px, 9vw, 130px);
-
-      line-height: .9;
-
-      letter-spacing: -.07em;
-    }
-
-    .contact p {
-      color: #777;
-
-      margin: 30px auto;
-
-      max-width: 500px;
-
-      line-height: 1.7;
-    }
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    footer {
-      padding: 30px 7vw;
-
-      display: flex;
-
-      justify-content: space-between;
-
       color: #555;
-
-      font-size: 12px;
-
-      border-top: 1px solid #1a1a1a;
+      font-size: 11px;
+      margin-top: 22px;
     }
 
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 700px) {
-
-      .nav-links {
-        display: none;
+    @media (max-width: 480px) {
+      body {
+        padding: 18px;
       }
 
-      .hero {
-        min-height: 90vh;
-
-        padding-left: 6vw;
-        padding-right: 6vw;
+      .login-card {
+        padding: 25px 20px;
       }
 
-      section {
-        padding-left: 6vw;
-        padding-right: 6vw;
+      h1 {
+        font-size: 24px;
       }
-
-      .projects-grid,
-      .testimonial-grid,
-      .about-grid,
-      .services {
-        grid-template-columns: 1fr;
-      }
-
-      .about-grid {
-        gap: 30px;
-      }
-
-      .hero-actions {
-        flex-direction: column;
-
-        align-items: flex-start;
-      }
-
-      footer {
-        flex-direction: column;
-
-        gap: 10px;
-      }
-
     }
-
   </style>
 </head>
 
 <body>
 
-<nav>
+  <main class="login-wrapper">
 
-  <a href="#" class="logo">
-    TC.
-  </a>
+    <div class="brand">
 
-  <div class="nav-links">
-
-    <a href="#work">Work</a>
-
-    <a href="#about">About</a>
-
-    <a href="#testimonials">
-      Testimonials
-    </a>
-
-    <a href="#contact">
-      Contact
-    </a>
-
-  </div>
-
-</nav>
-
-
-<main>
-
-  <!-- HERO -->
-
-  <section class="hero">
-
-    <div class="eyebrow">
-      Video Editor / Visual Storyteller
-    </div>
-
-    <h1>
-      I turn raw footage
-      <span>into attention.</span>
-    </h1>
-
-    <p class="hero-description">
-      Podcast-to-shorts editing, short-form content,
-      commercials and visual storytelling built to
-      make people stop, watch and remember.
-    </p>
-
-    <div class="hero-actions">
-
-      <a
-        href="#work"
-        class="button primary"
-      >
-        Explore my work
-      </a>
-
-      <a
-        href="#contact"
-        class="button"
-      >
-        Let's work
-      </a>
-
-    </div>
-
-  </section>
-
-
-  <!-- SHOWREEL -->
-
-  <section
-    class="showreel"
-    id="work"
-  >
-
-    <div class="section-label">
-      01 / Showreel
-    </div>
-
-    <h2 class="section-heading">
-      A few seconds
-      can change everything.
-    </h2>
-
-    <div class="showreel-frame">
-
-      <video
-        id="showreelVideo"
-        controls
-        playsinline
-        preload="metadata"
-      ></video>
-
-    </div>
-
-  </section>
-
-
-  <!-- PROJECTS -->
-
-  <section>
-
-    <div class="section-label">
-      02 / Selected Work
-    </div>
-
-    <h2 class="section-heading">
-      Work that speaks
-      before I do.
-    </h2>
-
-    <div
-      id="projectsGrid"
-      class="projects-grid"
-    ></div>
-
-  </section>
-
-
-  <!-- SERVICES -->
-
-  <section>
-
-    <div class="section-label">
-      03 / What I Do
-    </div>
-
-    <h2 class="section-heading">
-      Built for attention.
-    </h2>
-
-    <div class="services">
-
-      <div class="service">
-        Podcast → Shorts
+      <div class="brand-mark">
+        TC
       </div>
 
-      <div class="service">
-        Short-form Editing
+      <div class="brand-title">
+        Tansi Cyril
       </div>
 
-      <div class="service">
-        Commercial / Ad Editing
-      </div>
-
-      <div class="service">
-        Motion & Visual Storytelling
+      <div class="brand-subtitle">
+        Portfolio Administration
       </div>
 
     </div>
 
-  </section>
 
+    <section class="login-card">
 
-  <!-- ABOUT -->
-
-  <section id="about">
-
-    <div class="section-label">
-      04 / About
-    </div>
-
-    <h2 class="section-heading">
-      More than
-      just cutting clips.
-    </h2>
-
-    <div class="about-grid">
-
-      <div></div>
-
-      <div class="about-text">
-
-        I'm Tansi Cyril, a video editor focused on
-        turning ideas and raw footage into content
-        people actually want to watch.
-
-        <br><br>
-
-        My strongest work lives around podcast
-        content, short-form storytelling and
-        attention-driven edits — but I'm not limited
-        to one format.
-
-        <br><br>
-
-        Every cut, transition, sound and visual
-        decision has one purpose:
-
-        <br>
-
-        <strong>
-          make the story hit harder.
-        </strong>
-
+      <div class="eyebrow">
+        Private area
       </div>
 
+      <h1>
+        Welcome back.
+      </h1>
+
+      <p class="description">
+        Sign in to manage your projects, testimonials and portfolio content.
+      </p>
+
+
+      <form id="loginForm">
+
+        <div class="field">
+
+          <label for="email">
+            Email
+          </label>
+
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="password">
+            Password
+          </label>
+
+          <div class="input-wrap">
+
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="password-input"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            >
+
+            <button
+              type="button"
+              class="toggle-password"
+              id="togglePassword"
+            >
+              Show
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="login-button"
+          id="loginButton"
+        >
+          Sign in
+        </button>
+
+      </form>
+
+
+      <div
+        class="message"
+        id="message"
+      ></div>
+
+    </section>
+
+
+    <div class="footer">
+      Tansi Cyril © 2026
     </div>
 
-  </section>
+  </main>
 
 
-  <!-- TESTIMONIALS -->
+  <script type="module">
 
-  <section id="testimonials">
-
-    <div class="section-label">
-      05 / Testimonials
-    </div>
-
-    <h2 class="section-heading">
-      Don't take my
-      word for it.
-    </h2>
-
-    <div
-      id="testimonialsGrid"
-      class="testimonial-grid"
-    ></div>
-
-  </section>
+    import {
+      createClient
+    } from
+      "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
 
-  <!-- CONTACT -->
+    /*
+      SUPABASE CONFIG
+    */
 
-  <section
-    class="contact"
-    id="contact"
-  >
+    const SUPABASE_URL =
+      "https://jogogwzfspqtryadusuj.supabase.co";
 
-    <div class="section-label">
-      06 / Contact
-    </div>
-
-    <h2>
-      Let's make
-      something move.
-    </h2>
-
-    <p>
-      Have a podcast, brand, campaign or idea
-      that needs stronger visual storytelling?
-      Let's talk.
-    </p>
-
-    <a
-      href="mailto:hello@example.com"
-      class="button primary"
-    >
-      Start a conversation
-    </a>
-
-  </section>
-
-</main>
+    const SUPABASE_ANON_KEY =
+      "sb_publishable_gNyURgRCjKgTrrbawUZNkQ_B7vVB-IU";
 
 
-<footer>
-
-  <span>
-    © 2026 Tansi Cyril
-  </span>
-
-  <span>
-    Video Editor
-  </span>
-
-</footer>
+    const supabase =
+      createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+      );
 
 
-<script type="module">
+    /*
+      ELEMENTS
+    */
 
-import {
-  createClient
-} from
-"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+    const loginForm =
+      document.getElementById("loginForm");
+
+    const emailInput =
+      document.getElementById("email");
+
+    const passwordInput =
+      document.getElementById("password");
+
+    const loginButton =
+      document.getElementById("loginButton");
+
+    const message =
+      document.getElementById("message");
+
+    const togglePassword =
+      document.getElementById("togglePassword");
 
 
-const SUPABASE_URL =
-"YOUR_SUPABASE_URL";
+    /*
+      SHOW MESSAGE
+    */
 
-const SUPABASE_ANON_KEY =
-"YOUR_SUPABASE_ANON_KEY";
+    function showMessage(
+      text,
+      type = "error"
+    ) {
+
+      message.textContent = text;
+
+      message.className =
+        "message show " + type;
+
+    }
 
 
-const supabase =
-createClient(
-  SUPABASE_URL,
-  SUPABASE_ANON_KEY
-);
+    /*
+      HIDE MESSAGE
+    */
+
+    function hideMessage() {
+
+      message.textContent = "";
+
+      message.className =
+        "message";
+
+    }
 
 
-/* =========================
-   LOAD PROJECTS
-========================= */
+    /*
+      PASSWORD VISIBILITY
+    */
 
-async function loadProjects() {
+    togglePassword.addEventListener(
+      "click",
+      () => {
 
-  const {
-    data,
-    error
-  } = await supabase
+        const isPassword =
+          passwordInput.type === "password";
 
-    .from("projects")
+        passwordInput.type =
+          isPassword
+            ? "text"
+            : "password";
 
-    .select("*")
+        togglePassword.textContent =
+          isPassword
+            ? "Hide"
+            : "Show";
 
-    .eq("published", true)
-
-    .order(
-      "display_order",
-      {
-        ascending: true
       }
     );
 
 
-  if (error) {
+    /*
+      CHECK IF CURRENT USER IS ADMIN
+    */
 
-    console.error(
-      "Projects:",
-      error
-    );
+    async function checkAdmin() {
 
-    return;
+      try {
 
-  }
-
-
-  const grid =
-    document.getElementById(
-      "projectsGrid"
-    );
+        const {
+          data: {
+            session
+          }
+        } =
+          await supabase.auth.getSession();
 
 
-  grid.innerHTML =
-    data.map(project => `
+        if (!session) {
+          return false;
+        }
 
-      <article class="project">
 
-        <div class="project-media">
+        const {
+          data,
+          error
+        } =
+          await supabase.rpc("is_admin");
 
-          ${
-            project.video_url
 
-            ?
+        if (error) {
 
-            `
-              <video
-                src="${project.video_url}"
-                muted
-                loop
-                playsinline
-                preload="metadata"
-                onmouseenter="this.play()"
-                onmouseleave="this.pause()"
-              ></video>
-            `
+          console.error(
+            "Admin check failed:",
+            error
+          );
 
-            :
+          return false;
 
-            `
-              <img
-                src="${project.thumbnail_url || ''}"
-                alt="${project.title || ''}"
-                loading="lazy"
-              >
-            `
+        }
+
+
+        return data === true;
+
+      } catch (error) {
+
+        console.error(
+          "Admin check error:",
+          error
+        );
+
+        return false;
+
+      }
+
+    }
+
+
+    /*
+      CHECK EXISTING SESSION
+    */
+
+    async function checkExistingSession() {
+
+      const {
+        data: {
+          session
+        }
+      } =
+        await supabase.auth.getSession();
+
+
+      if (!session) {
+        return;
+      }
+
+
+      const isAdmin =
+        await checkAdmin();
+
+
+      if (isAdmin) {
+
+        window.location.href =
+          "/admin/dashboard.html";
+
+        return;
+
+      }
+
+
+      /*
+        Logged in but not an admin.
+        Sign them out so they cannot remain
+        inside the admin session.
+      */
+
+      await supabase.auth.signOut();
+
+    }
+
+
+    /*
+      LOGIN
+    */
+
+    loginForm.addEventListener(
+      "submit",
+      async (event) => {
+
+        event.preventDefault();
+
+        hideMessage();
+
+
+        const email =
+          emailInput.value.trim();
+
+        const password =
+          passwordInput.value;
+
+
+        if (!email || !password) {
+
+          showMessage(
+            "Please enter your email and password."
+          );
+
+          return;
+
+        }
+
+
+        loginButton.disabled = true;
+
+        loginButton.textContent =
+          "Signing in...";
+
+
+        try {
+
+          const {
+            data,
+            error
+          } =
+            await supabase.auth.signInWithPassword({
+              email,
+              password
+            });
+
+
+          if (error) {
+
+            console.error(
+              "Login error:",
+              error
+            );
+
+            showMessage(
+              "Invalid email or password."
+            );
+
+            return;
+
           }
 
-        </div>
 
-        <div class="project-info">
+          if (!data.session) {
 
-          <div class="project-category">
-            ${project.category || ""}
-          </div>
+            showMessage(
+              "Login could not be completed. Please try again."
+            );
 
-          <div class="project-title">
-            ${project.title || ""}
-          </div>
+            return;
 
-          <div class="project-client">
-            ${project.client || ""}
-          </div>
-
-        </div>
-
-      </article>
-
-    `).join("");
-
-}
+          }
 
 
-/* =========================
-   START
-========================= */
+          /*
+            Verify that the authenticated
+            account actually has admin access.
+          */
 
-loadProjects();
+          const {
+            data: adminData,
+            error: adminError
+          } =
+            await supabase.rpc("is_admin");
 
-</script>
+
+          if (adminError) {
+
+            console.error(
+              "Admin verification error:",
+              adminError
+            );
+
+            await supabase.auth.signOut();
+
+            showMessage(
+              "Admin verification failed. Please try again."
+            );
+
+            return;
+
+          }
+
+
+          if (adminData !== true) {
+
+            await supabase.auth.signOut();
+
+            showMessage(
+              "This account is not authorized to access the admin dashboard."
+            );
+
+            return;
+
+          }
+
+
+          showMessage(
+            "Login successful. Opening dashboard...",
+            "success"
+          );
+
+
+          setTimeout(
+            () => {
+
+              window.location.href =
+                "/admin/dashboard.html";
+
+            },
+            400
+          );
+
+
+        } catch (error) {
+
+          console.error(
+            "Unexpected login error:",
+            error
+          );
+
+          showMessage(
+            "Something went wrong. Please try again."
+          );
+
+        } finally {
+
+          loginButton.disabled = false;
+
+          loginButton.textContent =
+            "Sign in";
+
+        }
+
+      }
+    );
+
+
+    /*
+      START
+    */
+
+    checkExistingSession();
+
+  </script>
 
 </body>
 </html>
