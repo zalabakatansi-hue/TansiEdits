@@ -1191,28 +1191,234 @@
 
   <div class="modal" id="testimonialModal">
 
-    <div class="modal-content">
+  <div class="modal-content">
 
-      <div class="modal-header">
+    <div class="modal-header">
 
-        <div>
-          <div class="eyebrow">
-            Social proof
-          </div>
-
-          <div class="panel-title">
-            Testimonial
-          </div>
+      <div>
+        <div class="eyebrow">
+          Social proof
         </div>
 
+        <div class="panel-title">
+          Client testimonial
+        </div>
+      </div>
+
+      <button
+        class="close"
+        data-close="testimonialModal"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <form id="testimonialForm">
+
+      <input
+        type="hidden"
+        id="testimonialId"
+      >
+
+
+      <!-- CLIENT INFO -->
+
+      <div class="form-grid">
+
+        <div class="field">
+
+          <label>Client name</label>
+
+          <input
+            id="clientName"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Company</label>
+
+          <input
+            id="clientCompany"
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="form-grid">
+
+        <div class="field">
+
+          <label>Date</label>
+
+          <input
+            id="testimonialDate"
+            type="date"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Display order</label>
+
+          <input
+            id="testimonialOrder"
+            type="number"
+            value="0"
+          >
+
+        </div>
+
+      </div>
+
+
+      <!-- CLIENT PHOTO -->
+
+      <div class="field">
+
+        <label>Client photo</label>
+
+        <input
+          id="clientPhotoFile"
+          type="file"
+          accept="image/*"
+        >
+
+        <small
+          style="
+            display:block;
+            color:#777;
+            font-size:10px;
+            margin-top:7px;
+          "
+        >
+          Upload a profile photo from your phone.
+        </small>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Client photo URL — optional</label>
+
+        <input
+          id="clientPhoto"
+          placeholder="Existing image URL"
+        >
+
+      </div>
+
+
+      <!-- CONVERSATION SCREENSHOT -->
+
+      <div class="field">
+
+        <label>Conversation screenshot</label>
+
+        <input
+          id="testimonialScreenshotFile"
+          type="file"
+          accept="image/*"
+        >
+
+        <small
+          style="
+            display:block;
+            color:#777;
+            font-size:10px;
+            margin-top:7px;
+          "
+        >
+          Upload a screenshot of the client's message praising your work.
+        </small>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Conversation screenshot URL — optional</label>
+
+        <input
+          id="testimonialScreenshot"
+          placeholder="Existing screenshot URL"
+        >
+
+      </div>
+
+
+      <!-- QUOTE -->
+
+      <div class="field">
+
+        <label>Quote / context</label>
+
+        <textarea
+          id="testimonialQuote"
+          placeholder="Optional text version of the client's feedback."
+        ></textarea>
+
+      </div>
+
+
+      <!-- PUBLISH -->
+
+      <div class="field">
+
+        <label>Published</label>
+
+        <select id="testimonialPublished">
+
+          <option value="false">
+            Draft
+          </option>
+
+          <option value="true">
+            Published
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-actions">
+
         <button
-          class="close"
+          type="submit"
+          class="btn btn-primary"
+        >
+          Save testimonial
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-secondary"
           data-close="testimonialModal"
         >
-          ×
+          Cancel
         </button>
 
       </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<div id="toast"></div>
 
 
       <form id="testimonialForm">
@@ -2104,49 +2310,60 @@ thumbnail_url: thumbnailUrl,
 
     function openTestimonialModal(item = null) {
 
-      document
-        .getElementById("testimonialModal")
-        .classList.add("open");
+  document
+    .getElementById("testimonialModal")
+    .classList.add("open");
 
 
+  document.getElementById(
+    "testimonialId"
+  ).value = item?.id || "";
+
+
+  document.getElementById(
+    "clientName"
+  ).value = item?.client_name || "";
+
+
+  document.getElementById(
+    "clientCompany"
+  ).value = item?.company || "";
+
+      
       document.getElementById(
-        "testimonialId"
-      ).value = item?.id || "";
+  "testimonialDate"
+).value =
+  item?.testimonial_date || "";
+
+      
+  document.getElementById(
+    "testimonialQuote"
+  ).value = item?.quote || "";
+
+      
+  document.getElementById(
+    "clientPhoto"
+  ).value =
+    item?.client_photo_url || "";
 
 
-      document.getElementById(
-        "clientName"
-      ).value = item?.client_name || "";
+  document.getElementById(
+    "testimonialScreenshot"
+  ).value =
+    item?.screenshot_url || "";
 
 
-      document.getElementById(
-        "clientCompany"
-      ).value = item?.company || "";
+  document.getElementById(
+    "testimonialOrder"
+  ).value =
+    item?.sort_order || 0;
 
 
-      document.getElementById(
-        "testimonialQuote"
-      ).value = item?.quote || "";
-
-
-      document.getElementById(
-        "clientPhoto"
-      ).value =
-        item?.client_photo_url || "";
-
-
-      document.getElementById(
-        "testimonialOrder"
-      ).value =
-        item?.sort_order || 0;
-
-
-      document.getElementById(
-        "testimonialPublished"
-      ).value =
-        String(!!item?.published);
-
-    }
+  document.getElementById(
+    "testimonialPublished"
+  ).value =
+    String(!!item?.published);
+}
 
 
     async function editTestimonial(id) {
