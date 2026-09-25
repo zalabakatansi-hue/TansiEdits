@@ -709,7 +709,7 @@
 
 
     <!-- PROJECTS -->
-
+    
     <section class="page" id="projects">
 
       <div class="topbar">
@@ -1033,26 +1033,74 @@
 
         <div class="field">
 
-          <label>Video URL</label>
+  <label>Upload Video</label>
 
-          <input
-            id="projectVideo"
-            placeholder="YouTube / Vimeo / hosted video URL"
-          >
+  <input
+    id="projectVideoFile"
+    type="file"
+    accept="video/*"
+  >
 
-        </div>
+  <small
+    style="
+      display:block;
+      color:#777;
+      font-size:10px;
+      margin-top:7px;
+    "
+  >
+    Upload your project video from your phone.
+  </small>
+
+</div>
 
 
-        <div class="field">
+<div class="field">
 
-          <label>Thumbnail URL</label>
+  <label>Upload Thumbnail</label>
 
-          <input
-            id="projectThumbnail"
-            placeholder="Image URL"
-          >
+  <input
+    id="projectThumbnailFile"
+    type="file"
+    accept="image/*"
+  >
 
-        </div>
+  <small
+    style="
+      display:block;
+      color:#777;
+      font-size:10px;
+      margin-top:7px;
+    "
+  >
+    JPG, PNG or WebP recommended.
+  </small>
+
+</div>
+
+
+<div class="field">
+
+  <label>Video URL — optional</label>
+
+  <input
+    id="projectVideo"
+    placeholder="YouTube / Vimeo / hosted video URL"
+  >
+
+</div>
+
+
+<div class="field">
+
+  <label>Thumbnail URL — optional</label>
+
+  <input
+    id="projectThumbnail"
+    placeholder="Image URL"
+  >
+
+</div>
 
 
         <div class="form-grid">
@@ -1499,6 +1547,36 @@ if (!isAdmin) {
        PROJECTS
     ========================== */
 
+    async function uploadPortfolioFile(file, folder) {
+
+  if (!file) return null;
+
+  const safeName = file.name
+    .toLowerCase()
+    .replace(/[^a-z0-9.]+/g, "-");
+
+  const filePath =
+    `${folder}/${crypto.randomUUID()}-${safeName}`;
+
+  const { error } =
+    await supabase.storage
+      .from("portfolio-media")
+      .upload(filePath, file, {
+        cacheControl: "3600",
+        upsert: false
+      });
+
+  if (error) {
+    throw error;
+  }
+
+  const { data } =
+    supabase.storage
+      .from("portfolio-media")
+      .getPublicUrl(filePath);
+
+  return data.publicUrl;
+}
     async function loadProjects() {
 
       const container =
@@ -1751,6 +1829,65 @@ if (!isAdmin) {
 
         const id =
           document.getElementById("projectId").value;
+        
+        const videoFile =
+  document.getElementById(
+    "projectVideoFile"
+  ).files[0];
+
+const thumbnailFile =
+  document.getElementById(
+    "projectThumbnailFile"
+  ).files[0];
+
+
+let videoUrl =
+  document.getElementById(
+    "projectVideo"
+  ).value.trim();
+
+let thumbnailUrl =
+  document.getElementById(
+    "projectThumbnail"
+  ).value.trim();
+
+
+try {
+
+  if (videoFile) {
+
+    toast("Uploading video...");
+
+    videoUrl =
+      await uploadPortfolioFile(
+        videoFile,
+        "videos"
+      );
+
+  }
+
+  if (thumbnailFile) {
+
+    toast("Uploading thumbnail...");
+
+    thumbnailUrl =
+      await uploadPortfolioFile(
+        thumbnailFile,
+        "thumbnails"
+      );
+
+  }
+
+} catch (uploadError) {
+
+  toast(
+    "Upload failed: " +
+    uploadError.message
+  );
+
+  return;
+
+}
 
 
         const project = {
@@ -1775,15 +1912,9 @@ if (!isAdmin) {
               "projectDescription"
             ).value.trim(),
 
-          video_url:
-            document.getElementById(
-              "projectVideo"
-            ).value.trim(),
+          video_url: videoUrl,
 
-          thumbnail_url:
-            document.getElementById(
-              "projectThumbnail"
-            ).value.trim(),
+thumbnail_url: thumbnailUrl,
 
           year:
             Number(
