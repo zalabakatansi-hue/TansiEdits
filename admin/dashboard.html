@@ -2431,90 +2431,209 @@ thumbnail_url: thumbnailUrl,
 
 
     document
-      .getElementById("testimonialForm")
-      .addEventListener("submit", async event => {
+  .getElementById("testimonialForm")
+  .addEventListener("submit", async event => {
 
-        event.preventDefault();
+    event.preventDefault();
 
-
-        const id =
-          document.getElementById(
-            "testimonialId"
-          ).value;
-
-
-        const item = {
-
-          client_name:
-            document.getElementById(
-              "clientName"
-            ).value.trim(),
-
-          company:
-            document.getElementById(
-              "clientCompany"
-            ).value.trim(),
-
-          quote:
-            document.getElementById(
-              "testimonialQuote"
-            ).value.trim(),
-
-          client_photo_url:
-            document.getElementById(
-              "clientPhoto"
-            ).value.trim(),
-
-          sort_order:
-            Number(
-              document.getElementById(
-                "testimonialOrder"
-              ).value
-            ),
-
-          published:
-            document.getElementById(
-              "testimonialPublished"
-            ).value === "true"
-
-        };
+    const id =
+      document.getElementById(
+        "testimonialId"
+      ).value;
 
 
-        let result;
+    const clientName =
+      document.getElementById(
+        "clientName"
+      ).value.trim();
 
 
-        if (id) {
+    const company =
+      document.getElementById(
+        "clientCompany"
+      ).value.trim();
 
-          result = await supabase
+
+    const testimonialDate =
+      document.getElementById(
+        "testimonialDate"
+      ).value || null;
+
+
+    const quote =
+      document.getElementById(
+        "testimonialQuote"
+      ).value.trim();
+
+
+    const order =
+      Number(
+        document.getElementById(
+          "testimonialOrder"
+        ).value
+      ) || 0;
+
+
+    const published =
+      document.getElementById(
+        "testimonialPublished"
+      ).value === "true";
+
+
+    const clientPhotoFile =
+      document.getElementById(
+        "clientPhotoFile"
+      ).files[0];
+
+
+    const screenshotFile =
+      document.getElementById(
+        "testimonialScreenshotFile"
+      ).files[0];
+
+
+    let clientPhotoUrl =
+      document.getElementById(
+        "clientPhoto"
+      ).value.trim();
+
+
+    let screenshotUrl =
+      document.getElementById(
+        "testimonialScreenshot"
+      ).value.trim();
+
+
+    try {
+
+      /* =========================
+         UPLOAD CLIENT PHOTO
+      ========================= */
+
+      if (clientPhotoFile) {
+
+        toast(
+          "Uploading client photo..."
+        );
+
+        clientPhotoUrl =
+          await uploadPortfolioFile(
+            clientPhotoFile,
+            "client-photos"
+          );
+
+      }
+
+
+      /* =========================
+         UPLOAD SCREENSHOT
+      ========================= */
+
+      if (screenshotFile) {
+
+        toast(
+          "Uploading conversation screenshot..."
+        );
+
+        screenshotUrl =
+          await uploadPortfolioFile(
+            screenshotFile,
+            "testimonials"
+          );
+
+      }
+
+
+      /* =========================
+         SAVE TESTIMONIAL
+      ========================= */
+
+      const testimonial = {
+
+        client_name:
+          clientName,
+
+        company:
+          company,
+
+        testimonial_date:
+          testimonialDate,
+
+        quote:
+          quote,
+
+        client_photo_url:
+          clientPhotoUrl,
+
+        screenshot_url:
+          screenshotUrl,
+
+        sort_order:
+          order,
+
+        published:
+          published
+
+      };
+
+
+      let result;
+
+
+      if (id) {
+
+        result =
+          await supabase
             .from("testimonials")
-            .update(item)
+            .update(testimonial)
             .eq("id", id);
 
-        } else {
+      } else {
 
-          result = await supabase
+        result =
+          await supabase
             .from("testimonials")
-            .insert(item);
+            .insert(testimonial);
 
-        }
-
-
-        if (result.error) {
-
-          toast(result.error.message);
-
-          return;
-
-        }
+      }
 
 
-        closeModal("testimonialModal");
+      if (result.error) {
+        throw result.error;
+      }
 
-        toast("Testimonial saved.");
 
-        loadTestimonials();
+      toast(
+        "Testimonial saved successfully."
+      );
 
-      });
+
+      document
+        .getElementById(
+          "testimonialModal"
+        )
+        .classList.remove("open");
+
+
+      await loadTestimonials();
+
+
+    } catch (error) {
+
+      console.error(
+        "Testimonial save error:",
+        error
+      );
+
+
+      toast(
+        "Testimonial save failed: " +
+        error.message
+      );
+
+    }
+
+  });
 
 
     /* ==========================
