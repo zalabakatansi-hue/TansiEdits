@@ -158,11 +158,13 @@ window.login = async function () {
     }
 
     if (!isAdmin) {
-      status.textContent =
-        "AUTHENTICATED, BUT NOT ADMIN. Your user ID is: "
-        + data.user.id;
-      return;
-    }
+
+  status.textContent =
+    "AUTHENTICATED BUT NOT ADMIN. User ID: " +
+    data.user.id;
+
+  return;
+}
 
     status.textContent =
       "Admin verified. Opening dashboard...";
