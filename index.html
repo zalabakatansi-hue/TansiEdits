@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Tansi Cyril — Video Editor</title>
+  <meta
+    name="description"
+    content="Tansi Cyril is a video editor specializing in podcast-to-short-form content, storytelling, and high-retention social media edits."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #070707;
+      --text: #f4f4f0;
+      --muted: #858585;
+      --line: rgba(255,255,255,0.11);
+      --card: #101010;
+      --accent: #dfff00;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    /* =========================
+       CURSOR GLOW
+    ========================= */
+
+    .cursor-glow {
+      position: fixed;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(
+        circle,
+        rgba(223,255,0,0.07),
+        transparent 65%
+      );
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 22px 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      mix-blend-mode: difference;
+    }
+
+    .logo {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 12px;
+    }
+
+    .nav-right a {
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-right a:hover {
+      opacity: 1;
+    }
+
+    .nav-contact {
+      border: 1px solid rgba(255,255,255,0.35);
+      padding: 9px 14px;
+      border-radius: 100px;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 100svh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 120px 5vw 55px;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 70px 70px;
+      mask-image: linear-gradient(to bottom, transparent, black 35%, transparent);
+      pointer-events: none;
+    }
+
+    .hero-orb {
+      position: absolute;
+      width: 65vw;
+      height: 65vw;
+      max-width: 700px;
+      max-height: 700px;
+      border-radius: 50%;
+      right: -15%;
+      top: 8%;
+      background:
+        radial-gradient(
+          circle at 35% 30%,
+          rgba(255,255,255,0.13),
+          transparent 25%
+        ),
+        radial-gradient(
+          circle,
+          rgba(223,255,0,0.10),
+          transparent 65%
+        );
+      filter: blur(25px);
+      animation: float 8s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%,100% {
+        transform: translate3d(0,0,0) scale(1);
+      }
+
+      50% {
+        transform: translate3d(-25px,25px,0) scale(1.06);
+      }
+    }
+
+    .hero-topline {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 35px;
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+    }
+
+    .hero-title {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      font-size: clamp(60px, 11vw, 170px);
+      line-height: 0.83;
+      letter-spacing: -0.075em;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .hero-title span {
+      display: block;
+    }
+
+    .hero-title .outline {
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,0.45);
+    }
+
+    .hero-bottom {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 55px;
+    }
+
+    .hero-description {
+      max-width: 390px;
+      color: #aaa;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .cta-circle {
+      width: 43px;
+      height: 43px;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      transition: all 0.4s ease;
+    }
+
+    .hero-cta:hover .cta-circle {
+      background: var(--accent);
+      color: #000;
+      transform: rotate(45deg);
+    }
+
+    /* =========================
+       MARQUEE
+    ========================= */
+
+    .marquee {
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 17px 0;
+      white-space: nowrap;
+    }
+
+    .marquee-track {
+      display: inline-flex;
+      gap: 45px;
+      animation: marquee 22s linear infinite;
+    }
+
+    .marquee span {
+      font-family: "DM Mono", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: #777;
+    }
+
+    .marquee .dot {
+      color: var(--accent);
+    }
+
+    @keyframes marquee {
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* =========================
+       GENERAL SECTIONS
+    ========================= */
+
+    section {
+      position: relative;
+      z-index: 2;
+    }
+
+    .section {
+      padding: 140px 5vw;
+    }
+
+    .section-label {
+      font-family: "DM Mono", monospace;
+      color: var(--muted);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 35px;
+    }
+
+    .section-heading {
+      max-width: 950px;
+      font-size: clamp(42px, 7vw, 95px);
+      line-height: 0.92;
+      letter-spacing: -0.06em;
+      text-transform: uppercase;
+    }
+
+    /* =========================
+       SHOWREEL
+    ========================= */
+
+    .showreel {
+      padding-top: 90px;
+    }
+
+    .showreel-frame {
+      margin-top: 65px;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      min-height: 300px;
+      background:
+        linear-gradient(135deg, #161616, #080808);
+      border: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+    }
+
+    .showreel-frame::before {
+      content: "";
+      position: absolute;
+      width: 45%;
+      height: 70%;
+      background: radial-gradient(
+        circle,
+        rgba(223,255,0,0.13),
+        transparent 70%
+      );
+      filter: blur(35px);
+    }
+
+    .play-button {
+      position: relative;
+      z-index: 2;
+      width: 82px;
+      height: 82px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.5);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: all 0.4s ease;
+    }
+
+    .play-button::after {
+      content: "";
+      margin-left: 5px;
+      border-left: 13px solid white;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+    }
+
+    .play-button:hover {
+      transform: scale(1.12);
+      background: var(--accent);
+    }
+
+    .play-button:hover::after {
+      border-left-color: #000;
+    }
+
+    .showreel-meta {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      display: flex;
+      justify-content: space-between;
+      font-family: "DM Mono", monospace;
+      font-size: 9px;
+      color: #888;
+      text-transform: uppercase;
+    }
+
+    /* =========================
+       WORK
+    ========================= */
+
+    .work-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 30px;
+    }
+
+    .work-note {
+      max-width: 260px;
+      color: #888;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .projects {
+      margin-top: 80px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .project {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16 / 10;
+      background: var(--card);
+      border: 1px solid var(--line);
+      cursor: pointer;
+    }
+
+    .project:nth-child(2) {
+      margin-top: 100px;
+    }
+
+    .project:nth-child(3) {
+      margin-top: -30px;
+    }
+
+    .project-image {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          circle at 70% 30%,
+          rgba(223,255,0,0.12),
+          transparent 25%
+        ),
+        linear-gradient(135deg,#171717,#090909);
+      transition: transform 0.8s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .project:hover .project-image {
+      transform: scale(1.07);
+    }
+
+    .project-number {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      color: #999;
+      z-index: 2;
+    }
+
+    .project-info {
+      position: absolute;
+      bottom: 18px;
+      left: 18px;
+      right: 18px;
+      z-index: 2;
+    }
+
+    .project-title {
+      font-size: clamp(22px, 3vw, 42px);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+    }
+
+    .project-category {
+      margin-top: 6px;
+      font-family: "DM Mono", monospace;
+      font-size: 9px;
+      color: #999;
+      text-transform: uppercase;
+    }
+
+    /* =========================
+       ABOUT
+    ========================= */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 10vw;
+      align-items: start;
+    }
+
+    .about-big {
+      font-size: clamp(35px, 5vw, 70px);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+    }
+
+    .about-copy {
+      max-width: 550px;
+      color: #929292;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .about-copy p + p {
+      margin-top: 25px;
+    }
+
+    .skills {
+      margin-top: 45px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill {
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      padding: 10px 14px;
+      font-family: "DM Mono", monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+      color: #aaa;
+    }
+
+    /* =========================
+       TESTIMONIALS
+    ========================= */
+
+    .testimonial {
+      border-top: 1px solid var(--line);
+      margin-top: 75px;
+      padding-top: 45px;
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 40px;
+    }
+
+    .quote-mark {
+      font-size: 70px;
+      line-height: 0.5;
+      color: var(--accent);
+    }
+
+    .quote {
+      font-size: clamp(25px, 4vw, 52px);
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+    }
+
+    .client {
+      margin-top: 25px;
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      color: #777;
+      text-transform: uppercase;
+    }
+
+    /* =========================
+       CONTACT
+    ========================= */
+
+    .contact {
+      min-height: 75svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .contact-heading {
+      max-width: 1000px;
+      font-size: clamp(55px, 10vw, 150px);
+      line-height: 0.83;
+      letter-spacing: -0.075em;
+      text-transform: uppercase;
+    }
+
+    .contact-heading span {
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,0.4);
+    }
+
+    .contact-link {
+      display: inline-flex;
+      margin-top: 50px;
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      border-bottom: 1px solid #666;
+      padding-bottom: 8px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 25px 5vw;
+      display: flex;
+      justify-content: space-between;
+      color: #666;
+      font-family: "DM Mono", monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+    }
+
+    /* =========================
+       REVEAL ANIMATION
+    ========================= */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition:
+        opacity 0.9s ease,
+        transform 0.9s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 700px) {
+
+      nav {
+        padding: 18px 5vw;
+      }
+
+      .nav-right {
+        gap: 14px;
+      }
+
+      .nav-right a:not(.nav-contact) {
+        display: none;
+      }
+
+      .hero {
+        padding: 110px 5vw 40px;
+      }
+
+      .hero-topline {
+        margin-bottom: 25px;
+      }
+
+      .hero-title {
+        font-size: clamp(54px, 16vw, 100px);
+      }
+
+      .hero-bottom {
+        display: block;
+        margin-top: 45px;
+      }
+
+      .hero-description {
+        font-size: 13px;
+        max-width: 320px;
+      }
+
+      .hero-cta {
+        margin-top: 30px;
+      }
+
+      .section {
+        padding: 95px 5vw;
+      }
+
+      .showreel {
+        padding-top: 70px;
+      }
+
+      .showreel-frame {
+        aspect-ratio: 9 / 14;
+        min-height: 500px;
+      }
+
+      .work-header {
+        display: block;
+      }
+
+      .work-note {
+        margin-top: 25px;
+      }
+
+      .projects {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin-top: 50px;
+      }
+
+      .project {
+        aspect-ratio: 4 / 5;
+      }
+
+      .project:nth-child(2),
+      .project:nth-child(3) {
+        margin-top: 0;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+
+      .testimonial {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .quote-mark {
+        font-size: 50px;
+      }
+
+      .contact {
+        min-height: 70svh;
+      }
+
+      footer {
+        display: block;
+        line-height: 2;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* =========================
+       LIVE SUPABASE CONTENT
+    ========================= */
+
+    .live-status {
+      color:#777;
+      font-size:12px;
+      padding:20px 0;
+    }
+
+    .project-media {
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      background:#0b0b0b;
+    }
+
+    .project-media-wrap {
+      position:absolute;
+      inset:0;
+      overflow:hidden;
+      background:#101010;
+    }
+
+    .project-media-wrap iframe {
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
+    .project-overlay {
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,.88), rgba(0,0,0,.05) 65%);
+      z-index:1;
+    }
+
+    .project-description {
+      margin-top:8px;
+      max-width:650px;
+      color:#aaa;
+      font-size:12px;
+      line-height:1.5;
+    }
+
+    .showreel-frame.has-media {
+      overflow:hidden;
+    }
+
+    .showreel-frame .showreel-media {
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      background:#0b0b0b;
+    }
+
+    .showreel-frame iframe {
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
+    .showreel-frame .showreel-shade {
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,.85), transparent 65%);
+      pointer-events:none;
+    }
+
+    .testimonial-list {
+      display:grid;
+      gap:45px;
+    }
+
+    .testimonial-card {
+      border-top:1px solid var(--line);
+      padding-top:45px;
+      display:grid;
+      grid-template-columns:120px 1fr;
+      gap:40px;
+    }
+
+    .testimonial-proof {
+      margin-top:28px;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 90px;
+      gap:18px;
+      align-items:start;
+    }
+
+    .testimonial-proof img {
+      width:100%;
+      max-height:520px;
+      object-fit:contain;
+      background:#0b0b0b;
+      border:1px solid var(--line);
+    }
+
+    .client-photo {
+      width:90px !important;
+      height:90px;
+      border-radius:50%;
+      object-fit:cover !important;
+    }
+
+    .social-links {
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-top:25px;
+    }
+
+    .social-links a {
+      font-family:"DM Mono",monospace;
+      font-size:10px;
+      text-transform:uppercase;
+      color:#999;
+      border-bottom:1px solid #444;
+      padding-bottom:5px;
+    }
+
+    .empty-live {
+      color:#777;
+      font-size:13px;
+      padding:30px 0;
+    }
+
+    @media (max-width:700px) {
+      .testimonial-card {
+        grid-template-columns:1fr;
+        gap:25px;
+      }
+      .testimonial-proof {
+        grid-template-columns:1fr 70px;
+      }
+      .client-photo {
+        width:70px !important;
+        height:70px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="cursor-glow"></div>
+
+  <!-- NAVIGATION -->
+
+  <nav>
+    <a href="#" class="logo">TC / EDITOR</a>
+
+    <div class="nav-right">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact" class="nav-contact">Let's talk ↗</a>
+    </div>
+  </nav>
+
+
+  <!-- HERO -->
+
+  <header class="hero">
+
+    <div class="hero-grid"></div>
+    <div class="hero-orb"></div>
+
+    <div class="hero-topline">
+      <span>Video Editor / Storyteller</span>
+      <span>Available for selected projects</span>
+    </div>
+
+    <h1 class="hero-title" id="heroTitle">
+      <span>Cut.</span>
+      <span class="outline">Shape.</span>
+      <span>Impact.</span>
+    </h1>
+
+    <div class="hero-bottom">
+
+      <p class="hero-description" id="heroDescription">
+        I turn long-form conversations, podcasts and raw footage
+        into short-form content designed to hold attention.
+      </p>
+
+      <a href="#work" class="hero-cta">
+        Explore the work
+        <span class="cta-circle">↘</span>
+      </a>
+
+    </div>
+
+  </header>
+
+
+  <!-- MOVING STATEMENT -->
+
+  <div class="marquee">
+
+    <div class="marquee-track">
+
+      <span>Podcast Editing</span>
+      <span class="dot">●</span>
+
+      <span>Short Form</span>
+      <span class="dot">●</span>
+
+      <span>Storytelling</span>
+      <span class="dot">●</span>
+
+      <span>Social Content</span>
+      <span class="dot">●</span>
+
+      <span>Podcast Editing</span>
+      <span class="dot">●</span>
+
+      <span>Short Form</span>
+      <span class="dot">●</span>
+
+      <span>Storytelling</span>
+      <span class="dot">●</span>
+
+      <span>Social Content</span>
+      <span class="dot">●</span>
+
+    </div>
+
+  </div>
+
+
+  <!-- SHOWREEL -->
+
+  <section class="section showreel reveal">
+
+    <div class="section-label">
+      01 / Showreel
+    </div>
+
+    <h2 class="section-heading">
+      Make people<br>
+      stop scrolling.
+    </h2>
+
+    <div class="showreel-frame" id="showreelFrame">
+
+      <div class="live-status" id="showreelStatus">Loading showreel...</div>
+
+    </div>
+
+  </section>
+
+
+  <!-- WORK -->
+
+  <section class="section reveal" id="work">
+
+    <div class="work-header">
+
+      <div>
+        <div class="section-label">
+          02 / Selected Work
+        </div>
+
+        <h2 class="section-heading">
+          The edits.
+        </h2>
+      </div>
+
+      <p class="work-note">
+        A selection of podcast clips, short-form edits,
+        social content and other visual storytelling work.
+      </p>
+
+    </div>
+
+
+    <div class="projects" id="projectsList">
+      <div class="live-status">Loading selected work...</div>
+    </div>
+
+  </section>
+
+
+  <!-- ABOUT -->
+
+  <section class="section reveal" id="about">
+
+    <div class="section-label">
+      03 / About
+    </div>
+
+    <div class="about-grid">
+
+      <h2 class="about-big" id="aboutTitle">
+        Good editing<br>
+        isn't just<br>
+        cutting.
+      </h2>
+
+      <div class="about-copy">
+
+        <p id="aboutText">
+          I'm Tansi Cyril, a video editor focused on turning
+          raw footage and long-form conversations into content
+          people actually want to watch.
+        </p>
+
+        <p>
+          My main focus is podcast-to-short-form editing,
+          but I also work across social content, storytelling,
+          promotional videos and other formats where pacing
+          and attention matter.
+        </p>
+
+        <div class="skills">
+
+          <span class="skill">Podcast Editing</span>
+          <span class="skill">Short Form</span>
+          <span class="skill">Storytelling</span>
+          <span class="skill">Motion</span>
+          <span class="skill">Captions</span>
+          <span class="skill">Social Content</span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- TESTIMONIALS -->
+
+  <section class="section reveal">
+
+    <div class="section-label">
+      04 / Testimonials
+    </div>
+
+    <h2 class="section-heading">
+      Words from<br>
+      the people.
+    </h2>
+
+
+    <div class="testimonial-list" id="testimonialsList">
+      <div class="live-status">Loading testimonials...</div>
+    </div>
+
+  </section>
+
+
+  <!-- CONTACT -->
+
+  <section class="section contact reveal" id="contact">
+
+    <div class="section-label">
+      05 / Contact
+    </div>
+
+    <h2 class="contact-heading">
+      Have a story?
+      <span>Let's cut it.</span>
+    </h2>
+
+    <a
+      href="mailto:zalabakatansi@gmail.com" id="contactEmailLink"
+      class="contact-link"
+    >
+      Start a conversation ↗
+    </a>
+
+    <div class="social-links" id="socialLinks"></div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+    
+    <div class="legal-links">
+  <a href="./terms.html">Terms of Service</a>
+  <a href="./privacy.html">Privacy Policy</a>
+</div>
+    
+    <span>
+      © 2026 Tansi Cyril. All rights reserved
+    </span>
+
+    <span>
+      Video Editor / Storyteller
+    </span>
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
+  <script type="module">
+
+    import { createClient } from
+      "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+    const SUPABASE_URL =
+      "https://jogogwzfspqtryadusuj.supabase.co";
+
+    const SUPABASE_ANON_KEY =
+      "sb_publishable_gNyURgRCjKgTrrbawUZNkQ_B7vVB-IU";
+
+    const supabase = createClient(
+      SUPABASE_URL,
+      SUPABASE_ANON_KEY
+    );
+
+    const escapeHtml = (value = "") =>
+      String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+    function safeUrl(value) {
+      try {
+        const url = new URL(value);
+        if (["http:", "https:"].includes(url.protocol)) return url.href;
+      } catch (_) {}
+      return "";
+    }
+
+    function mediaKind(url) {
+      const value = (url || "").toLowerCase();
+      if (/\.(mp4|webm|ogg)(\?|#|$)/.test(value)) return "video";
+      if (value.includes("youtube.com") || value.includes("youtu.be") || value.includes("vimeo.com") || value.includes("tiktok.com")) return "embed";
+      return "image";
+    }
+
+    function youtubeEmbed(url) {
+      try {
+        const u = new URL(url);
+        let id = "";
+        if (u.hostname.includes("youtu.be")) id = u.pathname.slice(1);
+        if (u.hostname.includes("youtube.com")) id = u.searchParams.get("v") || u.pathname.split("/").pop();
+        return id ? `https://www.youtube.com/embed/${encodeURIComponent(id)}` : "";
+      } catch (_) { return ""; }
+    }
+
+    function createMedia(url, className = "project-media") {
+      const safe = safeUrl(url);
+      if (!safe) return `<div class="project-media"></div>`;
+      const kind = mediaKind(safe);
+      if (kind === "video") {
+        return `<video class="${className}" controls playsinline preload="metadata" src="${escapeHtml(safe)}"></video>`;
+      }
+      if (kind === "embed") {
+        const embed = safe.includes("youtube.com") || safe.includes("youtu.be") ? youtubeEmbed(safe) : safe;
+        if (embed) return `<iframe class="${className}" src="${escapeHtml(embed)}" title="Portfolio video" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+      }
+      return `<img class="${className}" src="${escapeHtml(safe)}" alt="Portfolio project" loading="lazy">`;
+    }
+
+    function formatClient(name, company) {
+      return [name, company].filter(Boolean).join(" / ");
+    }
+
+    async function loadSiteContent() {
+      const { data, error } = await supabase
+        .from("site_content")
+        .select("*")
+        .limit(1)
+        .maybeSingle();
+
+      if (error || !data) return;
+
+      const heroTitle = document.getElementById("heroTitle");
+      const heroDescription = document.getElementById("heroDescription");
+      const aboutTitle = document.getElementById("aboutTitle");
+      const aboutText = document.getElementById("aboutText");
+      const emailLink = document.getElementById("contactEmailLink");
+
+      if (data.hero_title) {
+        const parts = data.hero_title.split(/\s*\.\s*/).filter(Boolean);
+        if (parts.length >= 3) {
+          heroTitle.innerHTML = `<span>${escapeHtml(parts[0])}.</span><span class="outline">${escapeHtml(parts[1])}.</span><span>${escapeHtml(parts.slice(2).join(" "))}.</span>`;
+        } else {
+          heroTitle.textContent = data.hero_title;
+        }
+      }
+      if (data.hero_description) heroDescription.textContent = data.hero_description;
+      if (data.about_title) aboutTitle.textContent = data.about_title;
+      if (data.about_text) {
+        const chunks = data.about_text.split(/\n\s*\n/).filter(Boolean);
+        aboutText.textContent = chunks[0] || data.about_text;
+        if (chunks[1]) {
+          const second = document.createElement("p");
+          second.textContent = chunks[1];
+          aboutText.insertAdjacentElement("afterend", second);
+        }
+      }
+      if (data.contact_email) {
+        emailLink.href = `mailto:${data.contact_email}`;
+      }
+
+      const socialLinks = document.getElementById("socialLinks");
+      const socials = [
+        ["Instagram", data.instagram_url],
+        ["X / Twitter", data.twitter_url],
+        ["LinkedIn", data.linkedin_url],
+        ["YouTube", data.youtube_url]
+      ].filter(([, url]) => safeUrl(url));
+      socialLinks.innerHTML = socials.map(([label, url]) => `<a href="${escapeHtml(safeUrl(url))}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)} ↗</a>`).join("");
+
+      const phone = String(data.whatsapp_number || "").replace(/[^0-9]/g, "");
+      if (phone) {
+        const a = document.createElement("a");
+        a.href = `https://wa.me/${phone}`;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.textContent = "WhatsApp ↗";
+        socialLinks.prepend(a);
+      }
+    }
+
+    async function loadProjects() {
+      const list = document.getElementById("projectsList");
+      const { data, error } = await supabase
+        .from("projects")
+        .select("*")
+        .eq("published", true)
+        .order("sort_order", { ascending: true })
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        list.innerHTML = `<div class="empty-live">Selected work is temporarily unavailable.</div>`;
+        return;
+      }
+      if (!data?.length) {
+        list.innerHTML = `<div class="empty-live">New work is coming soon.</div>`;
+        return;
+      }
+
+      list.innerHTML = data.map((project, index) => {
+        const thumb = safeUrl(project.thumbnail_url);
+        const video = safeUrl(project.video_url);
+        const media = video ? createMedia(video) : (thumb ? `<img class="project-media" src="${escapeHtml(thumb)}" alt="${escapeHtml(project.title || "Portfolio project")}" loading="lazy">` : `<div class="project-media"></div>`);
+        return `<article class="project">
+          <div class="project-media-wrap">${media}</div>
+          <div class="project-overlay"></div>
+          <div class="project-number">${String(index + 1).padStart(3, "0")}</div>
+          <div class="project-info">
+            <h3 class="project-title">${escapeHtml(project.title || "Untitled project")}</h3>
+            <p class="project-category">${escapeHtml(project.category || "Video Editing")}${project.year ? " / " + escapeHtml(project.year) : ""}</p>
+            ${project.description ? `<p class="project-description">${escapeHtml(project.description)}</p>` : ""}
+          </div>
+        </article>`;
+      }).join("");
+
+      loadShowreel(data);
+    }
+
+    function loadShowreel(projects) {
+      const frame = document.getElementById("showreelFrame");
+      const featured = projects.find(p => p.featured && p.video_url) || projects.find(p => p.video_url);
+      if (!featured) {
+        frame.innerHTML = `<div class="showreel-meta"><span>Selected edits / 2026</span><span>More work coming soon</span></div>`;
+        return;
+      }
+      const media = createMedia(featured.video_url, "showreel-media");
+      frame.classList.add("has-media");
+      frame.innerHTML = `${media}<div class="showreel-shade"></div><div class="showreel-meta"><span>${escapeHtml(featured.title || "Selected edits")}</span><span>${escapeHtml(featured.year || "")}</span></div>`;
+    }
+
+    async function loadTestimonials() {
+      const list = document.getElementById("testimonialsList");
+      const { data, error } = await supabase
+        .from("testimonials")
+        .select("*")
+        .eq("published", true)
+        .order("sort_order", { ascending: true })
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        list.innerHTML = `<div class="empty-live">Testimonials are temporarily unavailable.</div>`;
+        return;
+      }
+      if (!data?.length) {
+        list.innerHTML = `<div class="empty-live">Client testimonials will appear here soon.</div>`;
+        return;
+      }
+
+      list.innerHTML = data.map(item => {
+        const screenshot = safeUrl(item.screenshot_url);
+        const photo = safeUrl(item.client_photo_url);
+        return `<article class="testimonial-card">
+          <div class="quote-mark">“</div>
+          <div>
+            <p class="quote">${escapeHtml(item.quote || "")}</p>
+            <p class="client">${escapeHtml(formatClient(item.client_name, item.company))}${item.testimonial_date ? " / " + escapeHtml(item.testimonial_date) : ""}</p>
+            ${(screenshot || photo) ? `<div class="testimonial-proof">${screenshot ? `<img src="${escapeHtml(screenshot)}" alt="Client conversation" loading="lazy">` : "<div></div>"}${photo ? `<img class="client-photo" src="${escapeHtml(photo)}" alt="${escapeHtml(item.client_name || "Client")}" loading="lazy">` : ""}</div>` : ""}
+          </div>
+        </article>`;
+      }).join("");
+    }
+
+    async function initLivePortfolio() {
+      await Promise.all([
+        loadSiteContent(),
+        loadProjects(),
+        loadTestimonials()
+      ]);
+    }
+
+    /* Cursor glow */
+    const glow = document.querySelector(".cursor-glow");
+    window.addEventListener("pointermove", (event) => {
+      if (glow) {
+        glow.style.left = event.clientX + "px";
+        glow.style.top = event.clientY + "px";
+      }
+    });
+
+    /* Scroll reveal */
+    const revealElements = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add("visible");
+      });
+    }, { threshold: 0.08 });
+    revealElements.forEach((element) => observer.observe(element));
+
+    initLivePortfolio();
+
+  </script>
+
+</body>
+</html>
